@@ -15,3 +15,10 @@ If you haven't done it yet, source a Key4hep software environment via
 ```bash
 source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
 ```
+
+and create a working directory for this exercise:
+
+```bash
+mkdir whizard_work
+cd whizard_work
+```

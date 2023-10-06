@@ -22,3 +22,19 @@ and create a working directory for this exercise:
 mkdir whizard_work
 cd whizard_work
 ```
+
+## Run the generator
+
+Download the example steering file [./zh_mumu0.sin](./zh_mumu0.sin) or use wget:
+
+```bash
+wget https://raw.githubusercontent.com/key4hep/key4hep-tutorials/main/whizard_gen/zh_mumu0.sin
+```
+And then you can generate some events:
+
+```bash
+whizard zh_mumu0.sin
+```
+
+
+

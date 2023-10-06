@@ -43,7 +43,7 @@ $shower_method = "PYTHIA6"
 
 sample_format = lcio
 
-n_events = 10000
+n_events = 10
 
 simulate  ( zh_mumu0)
 

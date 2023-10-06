@@ -36,5 +36,12 @@ And then you can generate your first 10 events with `WHIZARD`:
 whizard zh_mumu0.sin
 ```
 
+## Inspect the steering file
+...
+
+
+## Add the correct beamspectrum
+...
+
 
 

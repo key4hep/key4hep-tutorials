@@ -42,8 +42,18 @@ If the above has worked there are many files created by `WHIZARD`. We are here o
 ```bash
 dumpevent zhiggs.slcio 3 | less
 ```
-**Excercise:** use the dumpevent tool to look at the MC-truth record. Have we generated the right events for the process ($e^+e^- \rightarrow ZH$ with $Z\rightarrow \mu^+ \mu^-$) ?
+**Excercise:** use the `dumpevent` tool to look at the MC-truth record.
+ - Have we generated the right events for the process ($e^+e^- \rightarrow ZH$ with $Z\rightarrow \mu^+ \mu^-$) ?
+ - Have we generated the correct center of mass energy ?
 
+Answering the second question with `dumpevent` might be a bit cumbersome, though.
+
+Take a look at this python script [./lcio_mcparticle.py](./lcio_mcparticle.py) to see how this could be answered in a programatic way using the LCIO Python bindings.
+
+```bash
+python lcio_mcparticle.py zhiggs.slcio
+```
+   
 ## Add the correct beamspectrum
 ...
 

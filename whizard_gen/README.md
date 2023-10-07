@@ -37,12 +37,12 @@ whizard zhiggs.sin
 ```
 
 ## Inspect the output file
-If the above has worked there are many files created by `WHIZARD`. We are here only interested in the actual event output file: `zhiggs.slcio`.  This is an [LCIO](https://github.com/iLCSoft/LCIO) file that can be analyse with the usual tools, e.g. we can dump the record of the 3rd event:
+If the above has worked there are many files created by `WHIZARD`. We are here only interested in the actual event output file: `zhiggs.slcio`.  This is an [LCIO](https://github.com/iLCSoft/LCIO) file that can be analysed with the usual tools, e.g. we can dump the record of the 3rd event:
 
 ```bash
 dumpevent zhiggs.slcio 3 | less
 ```
-
+**Excercise:** use the dumpevent tool to look at the MC-truth record. Have we generated the right events for the process ($e^+e^- \rightarrow ZH$ with $Z\rightarrow \mu^+ \mu^-$) ?
 
 ## Add the correct beamspectrum
 ...

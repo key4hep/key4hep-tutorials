@@ -7,7 +7,7 @@ For more information, documentation and more advanced tutorials see the `WHIZARD
 [https://whizard.hepforge.org](https://whizard.hepforge.org).
 
 In this tutorial we will show you a very simple example for how to run `Whizard` to generate some
-events for the process $e^+e^- \rightarrow ZH$ with $Z\rightarrow \mu^+ \mu^-$ for the ILC at $E_{cms}=250~$GeV.
+events for the process $e^+e^- \rightarrow ZH$ with $Z\rightarrow \mu^+ \mu^-$ for the ILC at $E_{cms}=250$ GeV.
 
 ## Setup
 If you haven't done it yet, source a Key4hep software environment via

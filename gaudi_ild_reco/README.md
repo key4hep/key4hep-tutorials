@@ -191,6 +191,8 @@ It is necessary to adapt the Gaudi options file a bit further:
   with `"EventDataSvc"` as name)
 - Add a `PodioOutput` algorithm to write EDM4hep output (don't forget to add it
   to the `algList` at the very end)
+  - (For the sake of this exercise) configure this to only write the
+    `MCParticlesSkimmed`, `PandoraPFOs` and the `RecoMCTruthLink` collections
 - Attach the necessary in-memory on-the-fly converters between EDM4hep and LCIO
   (and vice versa)
   - For the conversion of the EDM4hep inputs to LCIO instantiate a
@@ -311,7 +313,12 @@ MyPfoAnalysis.Lcio2EDM4hepTool = lcio2edm4hepConv
 
 edm4hepOutput = PodioOutput()
 edm4hepOutput.filename = "zh_mumu_reco.edm4hep.root"
-edm4hepOutput.outputCommands = ["keep *"]
+edm4hepOutput.outputCommands = [
+    "drop *",
+    "keep MCParticlesSkimmed",
+    "keep PandoraPFOs",
+    "keep RecoMCTruthLink",
+]
 
 # ... the complete algList
 algList.append(MyPfoAnalysis)

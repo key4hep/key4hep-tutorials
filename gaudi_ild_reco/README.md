@@ -51,11 +51,13 @@ cd ILDConfig/StandardConfig/production
 
 ## Running the simulation
 
-We will use the output file of *the whizard tutorial* as generator level input.
-In case you have not done that exercise you can get one via
+We will use the output file of [*the whizard
+tutorial*](https://github.com/key4hep/key4hep-tutorials/blob/main/whizard_gen/README.md)
+as generator level input. In case you have not done that exercise you can get
+one via
 
 ```bash
-wget https://raw.githubusercontent.com/key4hep/key4hep-tutorials/main/gaudi_ild_reco/input_files/zh_mumu0.slcio
+wget https://raw.githubusercontent.com/key4hep/key4hep-tutorials/main/gaudi_ild_reco/input_files/zh_mumu.slcio
 ```
 
 Simulating a few events with `ddsim` is straight forward. `ddsim` can produce
@@ -75,8 +77,8 @@ To run the simulation with EDM4hep output you can use the following command
 ```bash
 ddsim --compactFile $lcgeo_DIR/ILD/compact/ILD_l5_v02/ILD_l5_v02.xml \
       --steeringFile ddsim_steer.py \
-      --inputFiles zh_mumu0.slcio \
-      --outputFile zh_mumu0_SIM.edm4hep.root
+      --inputFiles zh_mumu.slcio \
+      --outputFile zh_mumu_SIM.edm4hep.root
 ```
 
 :::
@@ -87,8 +89,8 @@ To run the simulation with LCIO output you can use the following command
 ``` bash
 ddsim --compactFile $lcgeo_DIR/ILD/compact/ILD_l5_v02/ILD_l5_v02.xml \
       --steeringFile ddsim_steer.py \
-      --inputFiles zh_mumu0.slcio \
-      --outputFile zh_mumu0_SIM.slcio
+      --inputFiles zh_mumu.slcio \
+      --outputFile zh_mumu_SIM.slcio
 ```
 
 :::
@@ -162,7 +164,7 @@ To run the reconstruction with LCIO inputs and outputs we now simply need to
 pass in the input file that we have created at the simulation step
 
 ```bash
-k4run MarlinStdReco.py --LcioEvent.Files=zh_mumu0_SIM.slcio
+k4run MarlinStdReco.py --LcioEvent.Files=zh_mumu_SIM.slcio
 ```
 
 This should take somewhere between 20 seconds up to roughly a minute to run. If
@@ -308,7 +310,7 @@ lcio2edm4hepConv.collNameMapping = {
 MyPfoAnalysis.Lcio2EDM4hepTool = lcio2edm4hepConv
 
 edm4hepOutput = PodioOutput()
-edm4hepOutput.filename = "zh_mumu0_reco.edm4hep.root"
+edm4hepOutput.filename = "zh_mumu_reco.edm4hep.root"
 edm4hepOutput.outputCommands = ["keep *"]
 
 # ... the complete algList
@@ -324,7 +326,7 @@ After all these adaptions it is now possible to run the full reconstruction
 chain on the previously simulated input with `k4run`
 
 ```bash
-k4run MarlinStdReco.py --num-events=3 --EventDataSvc.input=zh_mumu0_SIM.edm4hep.root
+k4run MarlinStdReco.py --num-events=3 --EventDataSvc.input=zh_mumu_SIM.edm4hep.root
 ```
 
 Here we are again using the command line to specify the input file, we could
@@ -332,7 +334,7 @@ have just as well used the `input` option of the `evtsvc` in the options file.
 Note also that we explicitly pass in the number of events, this is a workaround
 for [this issue](https://github.com/key4hep/k4MarlinWrapper/issues/94).
 
-You should now have a `zh_mumu0_reco.edm4hep.root` file that contains the
+You should now have a `zh_mumu_reco.edm4hep.root` file that contains the
 complete events in all their glory. For a more practical output you can tweak
 the `edm4hepOutput.outputCommands` option in order to keep only "interesting"
 collections. Also note that the REC and DST LCIO output files are still

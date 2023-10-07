@@ -68,7 +68,7 @@ Now it is rather straight forward to fix:
 
 Hints: `WHIZARD` uses its own language `SINDARIN` for the steerg files and needs so called circe files for the beam energy spectrum - see [http://whizard.hepforge.org/manual](http://whizard.hepforge.org/manual) and [http://whizard.hepforge.org/circe_files](http://whizard.hepforge.org/circe_files).
 
-If your done you should be able to see sth. like this:
+If you are done you should be able to see sth. like this:
 
 ```bash
 python lcio_mcparticle.py zh_mumu.slcio

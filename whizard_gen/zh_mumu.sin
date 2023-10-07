@@ -1,4 +1,4 @@
-
+! example steering file to generate ee->ZH, Z->mumu events for the ILC at 250 GeV
 model = SM_CKM
 !  some processes to taste
 ?resonance_history = true 

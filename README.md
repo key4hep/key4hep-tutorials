@@ -8,11 +8,11 @@ subfolder in this repository.
 
 ## Available tutorials
 
-- [`whizard_gen`](./whizard_gen/README.md) - A tutorial that shows a simple example
+- [`whizard_gen`](https://github.com/key4hep/key4hep-tutorials/blob/main/whizard_gen/README.md) - A tutorial that shows a simple example
   for generating events for the process $e^+e^- \rightarrow ZH$ with $Z\rightarrow \mu^+ \mu^-$
   for the ILC at $E_{cms}=250$ GeV.
 
-- [`gaudi_ild_reco`](./gaudi_ild_reco/README.md) - A tutorial that shows the
+- [`gaudi_ild_reco`](https://github.com/key4hep/key4hep-tutorials/blob/main/gaudi_ild_reco/README.md) - A tutorial that shows the
   full chain from simulation to reconstruction with the Gaudi based Key4hep
   framework using the ILD as example.
 

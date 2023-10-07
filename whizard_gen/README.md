@@ -55,8 +55,18 @@ Take a look at this python script [./lcio_mcparticle.py](./lcio_mcparticle.py) t
 python lcio_mcparticle.py zhiggs.slcio
 ```
    
-## Add the correct beamspectrum
-...
+## Modify the WHIZARD steering file
+
+In the last excercise we have seen that the example steering file does not yet produce the output file that we actually want.
+Now it is rather straight forward to fix:
+
+**Excercise:** modify the `zhiggs.sin` file to actually create what we want:
+ -  events for the process: $e^+e^- \rightarrow ZH$ with $Z\rightarrow \mu^+ \mu^-$
+ -  a correct beam spectrum for the ILC at $E_{cms}=250$ GeV
+ -  more than 10 events
+ -  output file name `zh_mumu.slcio`
+
+   
 
 
 

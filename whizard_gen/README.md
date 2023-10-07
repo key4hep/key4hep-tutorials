@@ -66,7 +66,7 @@ Now it is rather straight forward to fix:
  -  more than 10 events (e.g. 10k)
  -  output file name `zh_mumu.slcio`
 
-   
+Hints: `WHIZARD` uses its own language `SINDARIN` for the steerg files and needs so called circe files for the beam energy spectrum - see [http://whizard.hepforge.org/manual](http://whizard.hepforge.org/manual) and [http://whizard.hepforge.org/circe_files](http://whizard.hepforge.org/circe_files).
 
 
 

@@ -19,25 +19,29 @@ source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
 and create a working directory for this exercise:
 
 ```bash
-mkdir whizard_work
-cd whizard_work
+mkdir work_whizard
+cd work_whizard
 ```
 
 ## Run the generator
 
-Download the example steering file [./zh_mumu0.sin](./zh_mumu0.sin) or use wget:
+Download the example steering file [./zhiggs.sin](./zhiggs.sin) or use wget:
 
 ```bash
-wget https://raw.githubusercontent.com/key4hep/key4hep-tutorials/main/whizard_gen/zh_mumu0.sin
+wget https://raw.githubusercontent.com/key4hep/key4hep-tutorials/main/whizard_gen/zhiggs.sin
 ```
-And then you can generate your first 10 events with `WHIZARD`:
+And then you can generate your first events with `WHIZARD`:
 
 ```bash
-whizard zh_mumu0.sin
+whizard zhiggs.sin
 ```
 
-## Inspect the steering file
-...
+## Inspect the output file
+If the above has worked there are many files created by `WHIZARD`. We are here only interested in the actual event output file: `zhiggs.slcio`.  This is an [LCIO](https://github.com/iLCSoft/LCIO) file that can be analyse with the usual tools, e.g. we can dump the record of the 3rd event:
+
+```bash
+dumpevent zhiggs.slcio 3 | less
+```
 
 
 ## Add the correct beamspectrum

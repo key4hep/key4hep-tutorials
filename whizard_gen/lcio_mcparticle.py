@@ -1,14 +1,14 @@
 '''
  example python script to read lcio files
   -> compute average E_cms from MCParticle truth
-  Set these environment variables to run:
 
+ Note: these environment variables have to be set to run this
+       however this is done automatically in a Key4hep environment
  export PYTHONPATH=$ROOTSYS/lib:$PYTHONPATH
  export PYTHONPATH=${LCIO}/src/python:${LCIO}/examples/python:${PYTHONPATH}
 '''
 from pyLCIO import IOIMPL, UTIL
 import sys
-
 
 reader = IOIMPL.LCFactory.getInstance().createLCReader()
 
@@ -30,6 +30,6 @@ for evt in reader:
 
   E_cms += sqrts
 
-print( "<E_cms> = " , E_cms/nEvt )
+print( "<E_cms> = " , E_cms/nEvt , "  from ", nEvt, " events ")
 
  

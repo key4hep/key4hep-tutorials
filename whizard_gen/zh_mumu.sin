@@ -1,0 +1,49 @@
+! example steering file to generate ee->ZH, Z->mumu events for the ILC at 250 GeV
+model = SM_CKM
+!  some processes to taste
+?resonance_history = true 
+resonance_on_shell_limit = 16
+resonance_on_shell_turnoff = 2
+
+?isr_handler = true
+$isr_handler_mode = "recoil"
+isr_mass = 0.000511
+isr_alpha = 0.0072993
+
+process zh_mumu    =   e1,E1 => (e2,E2,H) { $omega_flags =  "-model:constant_width" }
+
+
+sqrts = 250 GeV
+
+!beams = e1,  E1 => isr,isr
+
+! add circe if wanted - then also add the circe-file to use :
+!
+beams = e1,  E1 => circe2 => isr,isr
+?circe2_polarized = false
+!  ! download this
+!  ! https://whizard.hepforge.org/circe_files/ILC/250_SetA_ee024.circe
+$circe2_file="250_SetA_ee024.circe"
+!
+!  Polarised beams, here 100% L e-, R e+:
+!
+! beams_pol_density = @(-1.000),@(1.000)
+! beams_pol_fraction = 1.0,1.0
+
+
+?write_raw = false
+?keep_remnants = true
+?keep_beams = true
+
+?ps_fsr_active = true
+$shower_method = "PYTHIA6"
+?hadronization_active = true
+
+
+sample_format = lcio
+
+n_events = 10000
+
+simulate  ( zh_mumu  )
+
+

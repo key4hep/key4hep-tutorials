@@ -63,7 +63,7 @@ Now it is rather straight forward to fix:
 **Excercise:** modify the `zhiggs.sin` file to actually create what we want:
  -  events for the process: $e^+e^- \rightarrow ZH$ with $Z\rightarrow \mu^+ \mu^-$
  -  a correct beam spectrum for the ILC at $E_{cms}=250$ GeV
- -  more than 10 events
+ -  more than 10 events (e.g. 10k)
  -  output file name `zh_mumu.slcio`
 
    

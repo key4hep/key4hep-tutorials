@@ -397,9 +397,8 @@ your expectations).
 ## Reading EDM4hep files
 EDM4hep files are read with tools provided by podio:
 
-- `ROOTFrameReader` - The default reader for files produced by, e.g. `k4SimDelphes`
-- `ROOTLegacyReader` - The legacy reader for files produced by, e.g. the Gaudi
-  based `k4FWCore`
+- `ROOTFrameReader` - The default reader for files produced recently
+- `ROOTLegacyReader` - The legacy reader for files produced in the past
 
 (There is also a `ROOTReader` that is obsolete and will be deprecated soon, so
 please don't use that). The main reason for two different readers is the
@@ -461,7 +460,10 @@ Since everything is based on PODs, the produced root files are pretty straight
 forward to read and interpret (with some caveats). They are already almost flat
 ntuples.
 
-![](images/browser_edm4hep_expanded.png)
+![](images/edm4hep_branches_1.png)
+
+
+![](images/edm4hep_browse_relations_1.png)
 
 ### How do I figure out if a file is legacy?
 

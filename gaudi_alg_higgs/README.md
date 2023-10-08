@@ -9,7 +9,7 @@ e^+ e^-\rightarrow Z^*\rightarrow HZ\rightarrow H\mu^+\mu^-
 which means
 
 ```math
-p_{e^+ e^-}=p_H+p_{mu^+}+p_{mu^-}
+p_{e^+ e^-}=p_H+p_{\mu^+}+p_{\mu^-}
 ```
 
 We will select final states with two muons. To illustrate a typical case, we'll
@@ -52,8 +52,8 @@ export CMAKE_PREFIX_PATH=$PWD:$CMAKE_PREFIX_PATH
 cd ../
 ```
 
-Now we should have compiled our code. Two C++ files will have been compiled
-`HiggsRecoil.cpp` and `MuonFilter.cpp` creating two Gaudi plugins that we are
+Now we should have compiled our code. Two C++ files will have been compiled:
+`HiggsRecoil.cpp` and `MuonFilter.cpp`, creating two Gaudi plugins that we are
 now able to import from python.
 
 To run the Higgs recoil process run the following:
@@ -62,6 +62,10 @@ To run the Higgs recoil process run the following:
 k4run options/runHiggsRecoil.py
 ```
 
+This file `runHiggsRecoil.py` is called a "steering file" because it has the
+instructions for what algorithms we want to run, what parameters we want to pass
+them and other configuration like logging.
+
 There are several options that can be changed in the steering file that may be important:
 - The name of the input file is passed to the `PodioInput` plugin
 - The name of the output file is passed to the `PodioOutput` plugin
@@ -69,13 +73,13 @@ There are several options that can be changed in the steering file that may be i
   not to limit it (all the events in the input file will be processed) or any
   other number to put a limit (sometimes useful for testing or debugging)
 - The level of output that we'll get while running. This is passed to the
-  `ApplicationMgr` and can be set to INFO, WARNING, DEBUG and other values. Make
+  `ApplicationMgr` and can be set to `INFO`, `WARNING`, `DEBUG` and other values. Make
   sure the actual value is imported in the steering file or python will complain
   that it isn't defined.
 
 After the processing has ran, we'll have an output file. We can inspect the file
 with `podio-dump` to see which collections it has. By default it will be a long
-list of collections since the collections of the input file are kept
+list of collections since the collections of the input file are kept:
 
 ```
 $ podio-dump higgs_recoil_out.root
@@ -100,15 +104,21 @@ Higgs                                     edm4hep::ReconstructedParticle        
 Z                                         edm4hep::ReconstructedParticle                  1  3dbac09d
 ```
 
+`podio-dump` has additional options (run with `-h` to see the complete list) to
+inspect more events and even to get the values of every member of every element
+of the collections.
+
 # Bonus: Running with multithreading
 
-By using `Gaudi::Functional` and the custom histograms from we are ready to run
-with multithtreading. A steering file for running with multithreading is
+By using `Gaudi::Functional` and the custom histograms from Gaudi we are ready
+to run with multithtreading. A steering file for running with multithreading is
 provided, to use it run:
 
 ``` bash
 k4run 
 ```
+
+You can modify the number of threads.
 
 # Plotting in python
 

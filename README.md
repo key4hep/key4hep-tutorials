@@ -2,8 +2,8 @@
 
 This repository contains instructions and documentation as well as potentially
 necessary (code) resources for several Key4hep tutorials. Each tutorial is aimed
-at being as standalone as possible, i.e. it should be possible to simply start
-any tutorial without having done any other before. Each tutorial is in it's own
+at being as standalone as possible, i.e., it should be possible to simply start
+any tutorial without having done any other before. Each tutorial is in its own
 subfolder in this repository.
 
 ## Available tutorials

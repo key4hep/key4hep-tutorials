@@ -19,7 +19,7 @@ subfolder in this repository.
 ## The instructions look a bit weird
 The instructions are in markdown (`md`) format, but they might contain `sphinx`
 specific tags since some of them are also included in the [key4hep
-website](https://key4hep.github.io/key4hep-doc/tutorials), where these allow for
+website](https://key4hep.github.io/key4hep-doc/tutorials/README.html), where these allow for
 a nicer rendering of additional information or the usage of more advanced
 documentation features. These tags usually start with at least three colons
 (':') and the most common one is probably

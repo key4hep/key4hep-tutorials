@@ -1,4 +1,51 @@
-# EDM4hep
+# Simple plotting with podio and EDM4hep
 
+This is a very simple exercise that aims to show how to use the plain podio and
+EDM4hep interfaces to read data from podio files. You can do this exercise using
+the c++ interface or the corresponding python bindings.
 
-Let's have a look at [the introduction to EDM4hep and podio](./edm4hep_api_intro.md)
+Let's have a look at [the introduction to EDM4hep and
+podio](./edm4hep_api_intro.md) first (if you haven't done so yet).
+
+## Setup
+
+Make sure that you are in a Key4hep software environment. If you are not yet, a
+simple way to get into one is to
+
+```bash
+source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
+```
+
+afterwards create a working directory for this exercise
+
+``` bash
+mkdir edm4hep_plotting_tutorial
+cd edm4hep_plotting_tutorial
+```
+
+- [ ] Input data (either point to Juan's Gaudi tutorial or provide some input
+      files somewhere)
+
+## Exercise
+
+The goal of this exercise is to plot the Higgs recoil mass as well as the $Z$
+mass peaks.
+
+You should find all the necessary information on how to do this in the
+[EDM4hep/podio
+documentation](https://github.com/key4hep/key4hep-tutorials/blob/main/edm4hep_analysis/edm4hep_api_intro.md).
+Hence, here we will only put together a list of things to do.
+
+- `import` or `#include` the necessary bits and pieces to read files and get
+  events (in the form of `podio::Frame`s).
+- Open the input files and create an event loop
+- Get the `Muons` collection from the file
+  - Discard all events where there aren't exactly two
+- Get the invariant mass of the dimuon combination (and assume that it is a $Z$)
+  - Remember that ther is [utility
+    functionality](https://edm4hep.web.cern.ch/namespaceedm4hep_1_1utils.html)
+    for getting the 4 momenta
+- Calculate the recoil mass using the knowledge of the colliding beams
+  - I.e. the CMS system has a 4-momentum of $(0, 0, 0, 250.0)$ (ignoring
+    beam-crossing angles)
+- Fill two histograms, one with the $Z$ mass, one with the recoil mass

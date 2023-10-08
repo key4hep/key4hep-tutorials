@@ -16,7 +16,7 @@ subfolder in this repository.
   full chain from simulation to reconstruction with the Gaudi based Key4hep
   framework using the ILD as example.
 
-- [`gaudi_alg_higgs`](https://github.com/key4hep/key4hep-tutorials/blob/main/gaudi_ild_reco/README.md) -
+- [`gaudi_alg_higgs`](https://github.com/key4hep/key4hep-tutorials/blob/main/gaudi_alg_higgs/README.md) -
   A tutorial that shows how to create an algorithm to run with Gaudi to obtain
   the mass of the Higgs in a Higgs-recoil process.
 

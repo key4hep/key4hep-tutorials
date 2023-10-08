@@ -19,7 +19,7 @@ We start with having a look at the [EDM4hep doxygen API reference
 page](https://edm4hep.web.cern.ch):
 
 ### The overview diagram
-![](../images/edm4hep_doxygen.png)
+![](images/edm4hep_doxygen.png)
 
 You see a diagrammatic overview of EDM4hep with all the available data types,
 broadly organized into different categories. The arrows depict two ways data
@@ -32,6 +32,7 @@ types can be related / associated with each other
 These are relations defined within the data types, and which are directly
 accessible from the data types. They come in two flavors, depending on the
 multiplicity of the relation
+
 - `OneToOneRelations` 
 - `OneToManyRelations` 
 
@@ -51,11 +52,12 @@ involved objects from the association.
 ### The table of available types
 Just below the diagram is an overview table of all the types that are defined in
 EDM4hep. Here they are organized into
+
 - `Components` - very simple types, that are used throughout the
 - `Datatypes` - The data types that are defined in EDM4hep
 - `Association` - The available associations between different data types
 
-![](../images/doxygen_type_table.png)
+![](images/doxygen_type_table.png)
 
 Clicking on any of these links will take you to the
 [`edm4hep.yaml`](https://github.com/key4hep/EDM4hep/blob/master/edm4hep.yaml)
@@ -71,16 +73,17 @@ Index`](https://edm4hep.web.cern.ch/classes.html) or on [`Classes -> Class
 List`](https://edm4hep.web.cern.ch/annotated.html). Doing the latter and
 expanding the `edm4hep` namespace gives you something like this
 
-![](../images/doxygen_class_list.png)
+![](images/doxygen_class_list.png)
 
 Clicking on any of the links in this list will take you to the reference page
 for that class, e.g. for the [`ReconstructedParticle`](https://edm4hep.web.cern.ch/classedm4hep_1_1_reconstructed_particle.html)
 
-![](../images/doxygen_reco_particle.png)
+![](images/doxygen_reco_particle.png)
 
 #### Why are there so many classes and do I need all of them?
 If you look at the list you will realize there are many classes that are all
 named very similar, e.g.
+
 - **`CaloHitContribution`**
 - **`CaloHitContributionCollection`**
 - `CaloHitContributionCollectionData`
@@ -127,29 +130,31 @@ The podio code generator is a python script that reads in the EDM definition in
 **yaml** format, does a few basic validation checks on the definition, and then
 generates all the necessary code via the Jinja2 template engine.
 
- ![]()<img src="../images/podio_generate.svg" width="320">
+ ![]()<img src="images/podio_generate.svg" width="320">
 
 The generated code should (among other things)
+
 - be efficient,
 - offer an easy to use interface,
 - offer performant I/O.
 
 Having automated code generation has a few advantages:
+
 - Freeing the user from the repetitive task of implementing all the types
   themselves
 - Freeing the user from having to deal with all the details of how to do things
   efficiently
-- Making it very easy to rollout improved implementations (or bug fixes) via
+- Making it very easy to roll out improved implementations (or bug fixes) via
   simply regenerating the code
 
 ### The three layers of podio
 To achieve the goals stated above podio favors composition over inheritance and
 uses **plain-old-data (POD)** types wherever possible. To achieve this podio
-employs a layered design, which makes it possile to have an efficient memory
+employs a layered design, which makes it possible to have an efficient memory
 layout and performant I/O implementation, while still offering an easy to use
 interface
 
-![]()<img src="../images/podio_layers.png" width="320">
+![]()<img src="images/podio_layers.png" width="320">
 
 - The *User Layer* is the top most layer and it **offers the full
   functionality** and is the **only layer with which users interact directly**.
@@ -191,7 +196,7 @@ for (auto reco : recos) {
 }
 ```
 
-This looks very similar to the equivalent python code (if you sqint a bit, and ignore the `auto`s, `;` and `{}` ;) )
+This looks very similar to the equivalent python code (if you squint a bit, and ignore the `auto`s, `;` and `{}` ;) )
 
 ```python
 auto recos = edm4hep.ReconstructedParticleCollection()
@@ -207,7 +212,7 @@ for reco in recos:
   vtx = reco.getStartVertex()
   # do something with the vertex
   
-  # loop over rleated tracks
+  # loop over related tracks
   for track in reco.getTracks():
     # do something with the tracks
 ```
@@ -262,7 +267,7 @@ void addToDaughters(MCParticle daughter);
 
 The underlying technical reasons are rather complex, dive quite deepish into c++
 nuances, and definitely far beyond the scope of this tutorial. In short: We need
-two different handle classes in order to control whether users are allowd to
+two different handle classes in order to control whether users are allowed to
 modify things or not. As one of the main goals of podio generated EDMs is to be
 thread safe the default generated class for each data type allows only for
 immutable read access, i.e. it provides only the `get` methods. Only the
@@ -316,7 +321,7 @@ This allows to create collections of objects, that are actually part of another
 collection, e.g. to simply collect all the muons that are present in a larger
 collection of reconstructed particles:
 
-![]()<img src="../images/podio_subset_collections.svg" width="200">
+![]()<img src="images/podio_subset_collections.svg" width="200">
 
 To create a subset collection, simply do
 ```cpp
@@ -343,7 +348,7 @@ safe interface for data access
 - All data that is inside a `Frame` is owned by it, and this is also reflected
   in its interface.
   
-![]()<img src="../images/frame_concept.svg" width="300">
+![]()<img src="images/frame_concept.svg" width="300">
   
 Here we will just briefly introduce the main functionality, for more details see
 the [documentation in
@@ -391,6 +396,7 @@ your expectations).
 
 ## Reading EDM4hep files
 EDM4hep files are read with tools provided by podio:
+
 - `ROOTFrameReader` - The default reader for files produced by, e.g. `k4SimDelphes`
 - `ROOTLegacyReader` - The legacy reader for files produced by, e.g. the Gaudi
   based `k4FWCore`
@@ -455,7 +461,7 @@ Since everything is based on PODs, the produced root files are pretty straight
 forward to read and interpret (with some caveats). They are already almost flat
 ntuples.
 
-![](../images/browser_edm4hep_expanded.png)
+![](images/browser_edm4hep_expanded.png)
 
 ### How do I figure out if a file is legacy?
 
@@ -470,7 +476,7 @@ Frame categories in this file (this is a legacy file!):
 
 2. Peek inside the root file and look at the contents
 
-![]()<img src="../images/initial_browser_edm4hep.png" width="200"> ![]()<img src="../images/initial_browser_legacy_edm4hep.png" width="200">
+![]()<img src="images/initial_browser_edm4hep.png" width="200"> ![]()<img src="images/initial_browser_legacy_edm4hep.png" width="200">
 
 
 ## `podio-dump`

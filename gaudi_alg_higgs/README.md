@@ -40,8 +40,8 @@ We'll work from the `setup` directory in this folder. Once there, run
 
 ```
 mkdir build
-cd build -DCMAKE_INSTALL_PREFIX=../install
-cmake ..
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=../install
 cmake --build . -j $(nproc) -t install 
 cd ../install
 export PATH=$PWD/bin:$PATH

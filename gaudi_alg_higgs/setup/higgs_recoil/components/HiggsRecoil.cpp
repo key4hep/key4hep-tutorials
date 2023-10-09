@@ -88,6 +88,11 @@ struct HiggsRecoil final
   mutable Gaudi::Accumulators::Histogram<1> higgsHist{this, "", "Higgs mass", {100, 0., 250., "m_{H} [GeV];Entries"}};
   mutable Gaudi::Accumulators::Histogram<1> zHist{this, "", "Z mass", {100, 0., 250., "m_{Z} [GeV];Entries"}};
 
+  /* We are going to leave thread-safe histogramming commented out since
+     the version of Gaudi installed in the stack is not recent enough. Once a
+     newer version is installed the following code has been tested and works
+
+
   // We run this to save histograms to a file
   StatusCode finalize() override {
     TFile file("histograms.root", "RECREATE");
@@ -106,6 +111,9 @@ struct HiggsRecoil final
 
     return StatusCode::SUCCESS;
   }
+
+  */
+
 };
 
 DECLARE_COMPONENT(HiggsRecoil)

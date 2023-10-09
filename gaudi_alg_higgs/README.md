@@ -59,7 +59,7 @@ now able to import from python.
 To run the Higgs recoil process run the following:
 
 ```
-k4run options/runHiggsRecoil.py
+k4run higgs_recoil/options/runHiggsRecoil.py
 ```
 
 This file `runHiggsRecoil.py` is called a "steering file" because it has the
@@ -108,15 +108,6 @@ Z                                         edm4hep::ReconstructedParticle        
 inspect more events and even to get the values of every member of every element
 of the collections.
 
-# Bonus: Running with multithreading
-
-By using `Gaudi::Functional` and the custom histograms from Gaudi we are ready
-to run with multithtreading. A steering file for running with multithreading is
-provided, to use it run:
-
-``` bash
-k4run 
-```
 
 You can modify the number of threads.
 
@@ -125,7 +116,7 @@ You can modify the number of threads.
 A simple script to make histograms in python is provided. Run:
 
 ``` bash
-python setup/higgs-recoil/plotting/plot.py
+python higgs_recoil/plotting/plot.py
 ```
 
 If the input file is found (it will be the output file that we have obtained
@@ -135,3 +126,11 @@ it locally by using `scp`.
 
 There are other possibilities from python: it's also possible to make plots
 using ROOT from python.
+
+# Running with multithreading
+
+By using `Gaudi::Functional` and the custom histograms from Gaudi we are ready
+to run with multithtreading. That means that we only have to make changes in our
+steering file to tell it to run with multithreading. This more advanced topic is
+reserved for a future tutorial.
+

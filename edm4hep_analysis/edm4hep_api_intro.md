@@ -130,7 +130,7 @@ The podio code generator is a python script that reads in the EDM definition in
 **yaml** format, does a few basic validation checks on the definition, and then
 generates all the necessary code via the Jinja2 template engine.
 
- ![]()<img src="images/podio_generate.svg" width="320">
+ ![]()<img src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/podio_generate.svg" width="320">
 
 The generated code should (among other things)
 
@@ -154,7 +154,7 @@ employs a layered design, which makes it possible to have an efficient memory
 layout and performant I/O implementation, while still offering an easy to use
 interface
 
-![]()<img src="images/podio_layers.png" width="320">
+![]()<img src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/podio_layers.png" width="320">
 
 - The *User Layer* is the top most layer and it **offers the full
   functionality** and is the **only layer with which users interact directly**.
@@ -321,7 +321,7 @@ This allows to create collections of objects, that are actually part of another
 collection, e.g. to simply collect all the muons that are present in a larger
 collection of reconstructed particles:
 
-![]()<img src="images/podio_subset_collections.svg" width="200">
+![]()<img src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/podio_subset_collections.svg" width="200">
 
 To create a subset collection, simply do
 ```cpp
@@ -348,7 +348,7 @@ safe interface for data access
 - All data that is inside a `Frame` is owned by it, and this is also reflected
   in its interface.
   
-![]()<img src="images/frame_concept.svg" width="300">
+![]()<img src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/frame_concept.svg" width="300">
   
 Here we will just briefly introduce the main functionality, for more details see
 the [documentation in
@@ -478,7 +478,7 @@ Frame categories in this file (this is a legacy file!):
 
 2. Peek inside the root file and look at the contents
 
-![]()<img src="images/initial_browser_edm4hep.png" width="200"> ![]()<img src="images/initial_browser_legacy_edm4hep.png" width="200">
+![]()<img src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/initial_browser_edm4hep.png" width="200"> ![]()<img src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/initial_browser_legacy_edm4hep.png" width="200">
 
 
 ## `podio-dump`

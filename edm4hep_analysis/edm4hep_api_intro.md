@@ -5,8 +5,6 @@ Here we will give a brief introduction to EDM4hep as well as some of the
 technicalities behind it. We will also guide you towards documentation and try
 to give you the knowledge to make sense of it.
 
-[[_TOC_]]
-
 ## Important resources
 
 - EDM4hep doxygen API reference page: [edm4hep.web.cern.ch](https://edm4hep.web.cern.ch)

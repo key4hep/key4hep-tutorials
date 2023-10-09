@@ -54,11 +54,17 @@ cd ../
 
 Now we should have compiled our code. Two C++ files will have been compiled:
 `HiggsRecoil.cpp` and `MuonFilter.cpp`, creating two Gaudi plugins that we are
-now able to import from python.
+now able to import from python. Now we can get a reconstructed file with the
+following command:
 
-To run the Higgs recoil process run the following:
-
+``` bash
+wget https://key4hep.web.cern.ch/tutorial/zh_mumu_ild_dst/rv02-02.sv02-02.mILD_l5_o1_v02.E250-SetA.I402004.Pe2e2h.eR.pL.n000.d_dstm_15090_0.edm4hep.root
 ```
+
+To run the Higgs recoil process change the location of the input data in the
+following file and then run:
+
+``` bash
 k4run higgs_recoil/options/runHiggsRecoil.py
 ```
 

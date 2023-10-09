@@ -40,6 +40,10 @@ struct MuonFilter final
   edm4hep::ReconstructedParticleCollection operator()(const edm4hep::ReconstructedParticleCollection& recoColl) const override {
 
     auto ret = edm4hep::ReconstructedParticleCollection();
+    // Since we are creating a new collection only from elements of an already
+    // existing collection we have to set the subset collection flag to true
+    // Otherwise there will be errors at runtime saying that the objects are
+    // already in a collection so they can't be put in another one
     ret.setSubsetCollection();
 
     int nMuons = 0;

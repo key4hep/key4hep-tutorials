@@ -23,8 +23,24 @@ mkdir edm4hep_plotting_tutorial
 cd edm4hep_plotting_tutorial
 ```
 
-- [ ] Input data (either point to Juan's Gaudi tutorial or provide some input
-      files somewhere)
+### Input data for the exercise
+
+In order to have at least some statistics for plots we have prepared a few input
+files for this exercise. You can find them at
+`/eos/project/k/key4hep/www/key4hep/tutorial/zh_mumu_filtered/`.[^1]
+
+[^1]:These are output files produced by the [*Gaudi algorithm
+tutorial*](https://github.com/key4hep/key4hep-tutorials/blob/main/gaudi_alg_higgs/README.md).
+
+In case you do not have access to EOS (e.g. because you are not on `lxplus`),
+you can also download these files via (each file contains roughly 9k events
+and has around 50MB)
+
+``` bash
+wget https://key4hep.web.cern.ch/tutorial/zh_mumu_filtered/higgs_recoil_from_gaudi_0.root
+wget https://key4hep.web.cern.ch/tutorial/zh_mumu_filtered/higgs_recoil_from_gaudi_1.root
+wget https://key4hep.web.cern.ch/tutorial/zh_mumu_filtered/higgs_recoil_from_gaudi_2.root
+```
 
 ## Exercise
 
@@ -40,9 +56,9 @@ Hence, here we will only put together a list of things to do.
   events (in the form of `podio::Frame`s).
 - Open the input files and create an event loop
 - Get the `Muons` collection from the file
-  - Discard all events where there aren't exactly two
+  - Discard all events where there aren't exactly two Muons
 - Get the invariant mass of the dimuon combination (and assume that it is a $Z$)
-  - Remember that ther is [utility
+  - Remember that there is [utility
     functionality](https://edm4hep.web.cern.ch/namespaceedm4hep_1_1utils.html)
     for getting the 4 momenta
 - Calculate the recoil mass using the knowledge of the colliding beams

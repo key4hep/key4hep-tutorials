@@ -1,5 +1,32 @@
 # Brief Introduction to Key4hep Tools
 
+## Prerequisites
+
+In order to follow this tutorial you need to log in to a machine where the software stack is installed, e.g. `lxplus` at CERN or the `NAF` at DESY.
+
+Then you can simply initialise the complete stack with:
+
+```bash
+. /cvmfs/sw-nightlies.hsf.org/key4hep/setup-paestum.sh
+```
+You should then see a message similar to:
+
+```
+...  Key4HEP release: 2023-10-07
+...  Use the following command to reproduce the current environment:
+...
+        source /cvmfs/sw-nightlies.hsf.org/key4hep/releases/2023-10-06-paestum/x86_64-centos7-gcc12.2.0-opt/key4hep-stack/2023-10-07-o4thuq/setup.sh
+...
+...  If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues
+```
+**Save this command for further reference. You will then get the exact same software version as used in this tutorial**
+
+
+
+---
+
+## Introduction
+
 Key4hep is the software ecosystem for future (and current) HEP experiments.
 In the following we will very briefly describe the main tools at the core of Key4hep.
 
@@ -22,7 +49,25 @@ For the linear collider community we are in a transition period where we gradual
 
 ![](./figs/ilcsoft_schema_gaudi.png)
 
-## Some Core Tools
+## Some Core Tools in Key4hep
+
+The following core tools will be introduced in this tutorial
+
+The DD4hep geometry toolkit provides detailed detector models with all necessary information for the complete processing chain:
+
+![](./figs/core/dd4hep_schema_LC.jpg)
+
+
+The LCIO event data model has is at the core of iLCSoft and currently still used in Key4hep as data format for the generator as intermediate data format in the Gaudi MarlinWrapper tool in connection with EDM4hep.
+
+![](./figs/core/lcio_edm_schema.png)
+
+Finally Marlin provides the framework to call all existing reconstruction and analysis modules (called processors):
+
+![](./figs/core/marlin_schema.png)
+
+
+
 
 
 

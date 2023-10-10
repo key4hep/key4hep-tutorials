@@ -61,6 +61,12 @@ following command:
 wget https://key4hep.web.cern.ch/tutorial/zh_mumu_ild_dst/rv02-02.sv02-02.mILD_l5_o1_v02.E250-SetA.I402004.Pe2e2h.eR.pL.n000.d_dstm_15090_0.edm4hep.root
 ```
 
+**If you are running on lxplus the file is also available on EOS:**
+
+```
+/eos/project-k/key4hep/www/key4hep/tutorial/zh_mumu_ild_dst/rv02-02.sv02-02.mILD_l5_o1_v02.E250-SetA.I402004.Pe2e2h.eR.pL.n000.d_dstm_15090_0.edm4hep.root
+```
+
 To run the Higgs recoil process change the location of the input data in the
 following file and then run:
 

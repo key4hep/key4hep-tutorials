@@ -33,6 +33,13 @@ inp.collections = [
 ]
 
 out = PodioOutput("out")
+out.outputCommands = [
+    "drop *",
+    "keep Muons",
+    "keep PandoraPFOs",
+    "keep Z",
+    "keep Higgs",
+]
 out.filename = "higgs_recoil_out.root"
 
 # The collections that we don't drop will be present in the output file

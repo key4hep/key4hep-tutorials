@@ -321,7 +321,6 @@ edm4hepOutput.outputCommands = [
 ]
 
 # ... the complete algList
-algList.append(MyPfoAnalysis)
 algList.append(edm4hepOutput)
 
 # ... ApplicationMgr config

@@ -19,9 +19,17 @@ You should then see a message similar to:
 ...
 ...  If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues
 ```
-**Save this command for further reference. You will then get the exact same software version as used in this tutorial**
+**Save this command for further reference. You will then get the exact same
+software version as used in this tutorial**
 
+## Input file locations
 
+Some of the tutorials will require some (large-ish) input data files. We have
+made them available for download, but for easier access they are also on EOS,
+resp. on NFS for the NAF. The top-level directories are
+
+- `/eos/project/k/key4hep/www/key4hep/tutorial/`
+- `/nfs/dust/ilc/group/ild/key4hep_tutorial/`
 
 ---
 

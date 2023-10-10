@@ -22,6 +22,10 @@ subfolder in this repository.
   A tutorial that shows how to create an algorithm to run with Gaudi to obtain
   the mass of the Higgs in a Higgs-recoil process.
 
+- [`edm4hep_analylsis`](https://github.com/key4hep/key4hep-tutorials/blob/main/edm4hep_analysis/README.md) -
+  Contains a small exercise that makes you use the basic components from podio
+  and EDM4hep for writing small plotting scripts
+
 ## The instructions look a bit weird
 The instructions are in markdown (`md`) format, but they might contain `sphinx`
 specific tags since some of them are also included in the [key4hep

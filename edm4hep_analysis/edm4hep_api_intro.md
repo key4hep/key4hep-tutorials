@@ -197,7 +197,7 @@ for (auto reco : recos) {
 This looks very similar to the equivalent python code (if you squint a bit, and ignore the `auto`s, `;` and `{}` ;) )
 
 ```python
-auto recos = edm4hep.ReconstructedParticleCollection()
+recos = edm4hep.ReconstructedParticleCollection()
 
 # ... fill, e.g. via
 p = recos.create()

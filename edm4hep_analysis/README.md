@@ -65,3 +65,7 @@ Hence, here we will only put together a list of things to do.
   - I.e. the CMS system has a 4-momentum of $(0, 0, 0, 250.0)$ (ignoring
     beam-crossing angles)
 - Fill two histograms, one with the $Z$ mass, one with the recoil mass
+
+### Solutions
+
+You can find potential solutions in the [`.solution`](.solutions/) folder

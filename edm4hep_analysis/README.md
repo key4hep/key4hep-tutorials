@@ -37,9 +37,9 @@ you can also download these files via (each file contains roughly 9k events
 and has around 50MB)
 
 ``` bash
-wget https://key4hep.web.cern.ch/tutorial/zh_mumu_filtered/higgs_recoil_from_gaudi_0.root
-wget https://key4hep.web.cern.ch/tutorial/zh_mumu_filtered/higgs_recoil_from_gaudi_1.root
-wget https://key4hep.web.cern.ch/tutorial/zh_mumu_filtered/higgs_recoil_from_gaudi_2.root
+wget https://key4hep.web.cern.ch/key4hep/tutorial/zh_mumu_filtered/higgs_recoil_from_gaudi_0.edm4hep.root
+wget https://key4hep.web.cern.ch/key4hep/tutorial/zh_mumu_filtered/higgs_recoil_from_gaudi_1.edm4hep.root
+wget https://key4hep.web.cern.ch/key4hep/tutorial/zh_mumu_filtered/higgs_recoil_from_gaudi_2.edm4hep.root
 ```
 
 ## Exercise

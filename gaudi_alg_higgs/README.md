@@ -34,6 +34,14 @@ echo $KEY4HEP_STACK
 
 should report a path like `/cvmfs/sw-nightlies.hsf.org/key4hep/releases/2023-10-06/...`
 
+In order to have the necessary code you also have to clone this repository and
+go into the `setup` directory of this exercise
+
+```bash
+git clone https://github.com/key4hep/key4hep-tutorials
+cd key4hep-tutorials/gaudi_alg_higgs/setup
+```
+
 # Running our Gaudi algorithm
 
 We'll work from the `setup` directory in this folder. Once there, run

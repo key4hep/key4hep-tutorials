@@ -16,7 +16,7 @@ We will select final states with two muons. To illustrate a typical case, we'll
 divide the process in two steps. The first step is to iterate through the events
 and select only the muons the pass a cut on Pt. A new collection with those
 muons will be added and used in the main `HiggsRecoil.cpp` to select only
-eventns with two muons and get the mass. Note that it's possible (and fine) to
+events with two muons and get the mass. Note that it's possible (and fine) to
 do this in a single algorithm without intermediate steps, or without saving the
 intermediate collection with the muons.
 
@@ -150,7 +150,7 @@ using ROOT from python.
 # Running with multithreading
 
 By using `Gaudi::Functional` and the custom histograms from Gaudi we are ready
-to run with multithtreading. That means that we only have to make changes in our
+to run with multithreading. That means that we only have to make changes in our
 steering file to tell it to run with multithreading. This more advanced topic is
 reserved for a future tutorial.
 

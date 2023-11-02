@@ -8,7 +8,7 @@ subfolder in this repository.
 
 ## Available tutorials
 
-- [`introduction_key4hep`](https://github.com/key4hep/key4hep-tutorials/blob/main/introduction_key4hep/README.md) Prerequesites, basic introduction and links to further documentation.
+- [`introduction_key4hep`](https://github.com/key4hep/key4hep-tutorials/blob/main/introduction_key4hep/README.md) Prerequisites, basic introduction and links to further documentation.
 
 - [`whizard_gen`](https://github.com/key4hep/key4hep-tutorials/blob/main/whizard_gen/README.md) - A tutorial that shows a simple example
   for generating events for the process $e^+e^- \rightarrow ZH$ with $Z\rightarrow \mu^+ \mu^-$

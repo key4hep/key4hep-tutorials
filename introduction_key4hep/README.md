@@ -53,7 +53,7 @@ iLCSoft is a subset of Key4hep. It has been developed for two decades by the lin
 
 ![](./figs/ilcsoft_schema_marlin.png)
 
-For the linear collider community we are in a transition period where we gradualy replace the LCIO EDM with EDM4hep and the Marlin processing framework with Gaudi:
+For the linear collider community we are in a transition period where we gradually replace the LCIO EDM with EDM4hep and the Marlin processing framework with Gaudi:
 
 ![](./figs/ilcsoft_schema_gaudi.png)
 

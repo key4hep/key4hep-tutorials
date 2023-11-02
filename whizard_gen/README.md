@@ -43,13 +43,13 @@ If the above has worked there are many files created by `WHIZARD`. We are here o
 ```bash
 dumpevent zhiggs.slcio 3 | less
 ```
-**Excercise:** use the `dumpevent` tool to look at the MC-truth record.
+**Exercise:** use the `dumpevent` tool to look at the MC-truth record.
  - Have we generated the right events for the process ($e^+e^- \rightarrow ZH$ with $Z\rightarrow \mu^+ \mu^-$) ?
  - Have we generated the correct center of mass energy ?
 
 Answering the second question with `dumpevent` might be a bit cumbersome, though.
 
-Take a look at this python script [./lcio_mcparticle.py](./lcio_mcparticle.py) to see how this could be answered in a programatic way using the LCIO Python bindings.
+Take a look at this python script [./lcio_mcparticle.py](./lcio_mcparticle.py) to see how this could be answered in a programmatic way using the LCIO Python bindings.
 
 ```bash
 python lcio_mcparticle.py zhiggs.slcio
@@ -57,16 +57,16 @@ python lcio_mcparticle.py zhiggs.slcio
    
 ## Modify the WHIZARD steering file
 
-In the last excercise we have seen that the example steering file does not yet produce the output file that we actually want.
+In the last exercise we have seen that the example steering file does not yet produce the output file that we actually want.
 Now it is rather straight forward to fix:
 
-**Excercise:** modify the `zhiggs.sin` file to actually create what we want:
+**Exercise:** modify the `zhiggs.sin` file to actually create what we want:
  -  events for the process: $e^+e^- \rightarrow ZH$ with $Z\rightarrow \mu^+ \mu^-$
  -  a correct beam spectrum for the ILC at $E_{cms}=250$ GeV
  -  more than 10 events (e.g. 10k)
  -  output file name `zh_mumu.slcio`
 
-Hints: `WHIZARD` uses its own language `SINDARIN` for the steerg files and needs so called circe files for the beam energy spectrum - see [http://whizard.hepforge.org/manual](http://whizard.hepforge.org/manual) and [http://whizard.hepforge.org/circe_files](http://whizard.hepforge.org/circe_files).
+Hints: `WHIZARD` uses its own language `SINDARIN` for the steering files and needs so called circe files for the beam energy spectrum - see [http://whizard.hepforge.org/manual](http://whizard.hepforge.org/manual) and [http://whizard.hepforge.org/circe_files](http://whizard.hepforge.org/circe_files).
 
 If you are done you should be able to see sth. like this:
 

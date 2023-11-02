@@ -132,7 +132,7 @@ convertMarlinSteeringToGaudi.py MarlinStdRecoParsed.xml MarlinStdReco.py
 Since some parts of the Marlin steering file conversion can not be handled
 automatically we have to make a few adjustments to `MarlinStdReco.py`. We
 recommend to simply edit the file directly, but you can also use the `sed`
-commands below to do these adjustments. The adjusments are:
+commands below to do these adjustments. The adjustments are:
 - Give the `lcgeo_DIR` constant (first entry in the `CONSTANTS` dict) a
   meaningful value. The easiest way to do this is to simply get the value of the
   corresponding environment variable via `os.environ["lcgeo_DIR"]` (don't forget
@@ -159,7 +159,7 @@ sed -i 's/algList.append(PairBgOverlay)/# algList.append(PairBgOverlay)/' Marlin
 With the state the options file is in now, you would be able to run it with LCIO
 input.
 
-:::{dropdown} Running the reconstrucion with LCIO
+:::{dropdown} Running the reconstruction with LCIO
 To run the reconstruction with LCIO inputs and outputs we now simply need to
 pass in the input file that we have created at the simulation step
 

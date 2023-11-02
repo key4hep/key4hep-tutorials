@@ -428,7 +428,7 @@ int main() {
   reader.openFile("some_file_containing_edm4hep_data.root");
   
   // Loop over all events
-  for (size_t i = 0; reader.getEntries("events"); ++i) {
+  for (size_t i = 0; i < reader.getEntries("events"); ++i) {
     auto event = podio::Frame(reader.readNextEntry("events"));
     auto& mcParticles = event.get<edm4hep::MCParticleCollection>("MCParticles");
     

@@ -1,4 +1,4 @@
-# Runing ILD simulation and reconstruction
+# Running ILD simulation and reconstruction
 
 This exercise aims at showing you how to run full simulation as well as
 reconstruction using `ddsim` and the Gaudi based Key4hep framework respectively.
@@ -35,7 +35,7 @@ cd key4hep_tut_ild_reco
 However, this is a minor detail and you can choose whatever directory you want.
 We do suggest a clean directory though.
 
-Next we will be using the the standard simulation and reconstruction
+Next we will be using the standard simulation and reconstruction
 configuration for ILD which we can get via
 
 ```bash
@@ -137,7 +137,7 @@ commands below to do these adjustments. The adjustments are:
   meaningful value. The easiest way to do this is to simply get the value of the
   corresponding environment variable via `os.environ["lcgeo_DIR"]` (don't forget
   to `import os` at the top)
-- Exclude the `BgOverlayWW`, `BgOverlayBB`, `BgOverlayBW` and `BgOverlayWB`
+- Exclude the `BgOverlayWW`, `BgOverlayBB`, `BgOverlayBW`, `BgOverlayWB` and `PairBgOverlay`
   algorithms from being run, by simply commenting out the lines where these are
   appended to the `algList` (this list is populated at almost the end of the
   file).
@@ -176,7 +176,7 @@ ls StandardReco_*.*
 
 should now show a `REC` and `DST` file, as well as a `PfoAnalysis` and an `AIDA`
 file. You can change the names of these files by adjusting the `OutputBaseName`,
-resp. the corresponding filename constants values in `CONSTANTS`.
+resp. The corresponding filename constants values in `CONSTANTS`.
 
 :::
 
@@ -197,10 +197,11 @@ It is necessary to adapt the Gaudi options file a bit further:
   (and vice versa)
   - For the conversion of the EDM4hep inputs to LCIO instantiate a
     `EDM4hep2LcioTool` and attach it to the first wrapped processor that is run
-    (`MyAIDAProcessor`). 
+    (`MyAIDAProcessor`). See detailed description below.
   - For the conversion of the LCIO outputs to EDM4hep instantiate a
     `Lcio2EDM4hepTool` and attach it to the last wrapped processor that is run
-    before the `PodioOutput` algorithm that you just added (`MyPfoAnalysis`)
+    before the `PodioOutput` algorithm that you just added (`MyPfoAnalysis`).
+    Also see below.
     
 **For all of these steps make sure that you `import` all the necessary tools and
 algorithms from `Configurables`!**

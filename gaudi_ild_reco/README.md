@@ -137,7 +137,7 @@ commands below to do these adjustments. The adjustments are:
   meaningful value. The easiest way to do this is to simply get the value of the
   corresponding environment variable via `os.environ["lcgeo_DIR"]` (don't forget
   to `import os` at the top)
-- Exclude the `BgOverlayWW`, `BgOverlayBB`, `BgOverlayBW` and `BgOverlayWB`
+- Exclude the `BgOverlayWW`, `BgOverlayBB`, `BgOverlayBW`, `BgOverlayWB` and `PairBgOverlay`
   algorithms from being run, by simply commenting out the lines where these are
   appended to the `algList` (this list is populated at almost the end of the
   file).
@@ -197,10 +197,11 @@ It is necessary to adapt the Gaudi options file a bit further:
   (and vice versa)
   - For the conversion of the EDM4hep inputs to LCIO instantiate a
     `EDM4hep2LcioTool` and attach it to the first wrapped processor that is run
-    (`MyAIDAProcessor`). 
+    (`MyAIDAProcessor`). See detailed description below.
   - For the conversion of the LCIO outputs to EDM4hep instantiate a
     `Lcio2EDM4hepTool` and attach it to the last wrapped processor that is run
-    before the `PodioOutput` algorithm that you just added (`MyPfoAnalysis`)
+    before the `PodioOutput` algorithm that you just added (`MyPfoAnalysis`).
+    Also see below.
     
 **For all of these steps make sure that you `import` all the necessary tools and
 algorithms from `Configurables`!**

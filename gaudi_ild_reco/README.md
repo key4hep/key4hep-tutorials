@@ -1,4 +1,4 @@
-# Runing ILD simulation and reconstruction
+# Running ILD simulation and reconstruction
 
 This exercise aims at showing you how to run full simulation as well as
 reconstruction using `ddsim` and the Gaudi based Key4hep framework respectively.
@@ -35,7 +35,7 @@ cd key4hep_tut_ild_reco
 However, this is a minor detail and you can choose whatever directory you want.
 We do suggest a clean directory though.
 
-Next we will be using the the standard simulation and reconstruction
+Next we will be using the standard simulation and reconstruction
 configuration for ILD which we can get via
 
 ```bash
@@ -176,7 +176,7 @@ ls StandardReco_*.*
 
 should now show a `REC` and `DST` file, as well as a `PfoAnalysis` and an `AIDA`
 file. You can change the names of these files by adjusting the `OutputBaseName`,
-resp. the corresponding filename constants values in `CONSTANTS`.
+resp. The corresponding filename constants values in `CONSTANTS`.
 
 :::
 

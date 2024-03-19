@@ -50,7 +50,7 @@ struct MuonFilter final
     // Iterate over each ReconstructedParticle in the input collection
     for (const auto& reco : recoColl) {
       // The PDG ID of the muon is 13 or -13
-      if (std::abs(reco.getType()) == 13) {
+      if (std::abs(reco.getPDG()) == 13) {
         // Cut on Pt
         const auto muonPt = edm4hep::utils::pt(reco);
         if (muonPt > m_minPt) {

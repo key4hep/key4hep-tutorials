@@ -68,4 +68,4 @@ Hence, here we will only put together a list of things to do.
 
 ### Solutions
 
-You can find potential solutions in the [`.solution`](.solutions/) folder
+You can find potential solutions in the [`.solution`](.solution/) folder

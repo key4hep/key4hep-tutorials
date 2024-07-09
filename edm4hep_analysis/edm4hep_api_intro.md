@@ -9,6 +9,7 @@ to give you the knowledge to make sense of it.
 
 - EDM4hep doxygen API reference page: [edm4hep.web.cern.ch](https://edm4hep.web.cern.ch)
 - EDM4hep github repository: [github.com/key4hep/EDM4hep](https://github.com/key4hep/EDM4hep)
+- podio documentation page (including API reference): [key4hep.web.cern.ch/podio](https://key4hep.web.cern.ch/podio)
 - podio github repository: [github.com/AIDASoft/podio](https://github.com/AIDASoft/podio)
 
 ## Doxygen API documentation

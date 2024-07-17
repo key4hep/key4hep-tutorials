@@ -394,18 +394,45 @@ we do enough that you still can use this, but don't expect the results to match
 your expectations).
 
 ## Reading EDM4hep files
-EDM4hep files are read with tools provided by podio:
+EDM4hep files are read with tools provided by podio. As podio supports multiple
+different backends there are several, *low level* readers that support all the
+necessary functionality. You can obviously use these readers directly, but we
+recommend to use the `Reader` class and the `makeReader` function that will
+dispatch to the correct low level reader automatically.
 
-- `ROOTFrameReader` - The default reader for files produced recently
-- `ROOTLegacyReader` - The legacy reader for files produced in the past
+```cpp
+#include <podio/Reader.h>
 
-(There is also a `ROOTReader` that is obsolete and will be deprecated soon, so
-please don't use that). The main reason for two different readers is the
-introduction of the Frame concept which is not yet fully complete so currently
-things are in a sort of "hybrid state". See
+#include <edm4hep/MCParticleCollection.h>
+
+int main() {
+  auto reader = podio::makeReader("some_file_containing_edm4hep.data.root");
+
+  // Loop over all events
+  for (size_t i = 0; i < reader.getEvents(); ++i) {
+    auto event = reader.readNextEvent());
+    auto& mcParticles = event.get<edm4hep::MCParticleCollection>("MCParticles");
+
+    // do more stuff with this event
+  }
+
+  return 0;
+}
+```
+
+### The available low level readers
+
+- `ROOTReader` - The default reader for TTree based files
+- `ROOTLegacyReader` - The reader for an old podio format based on TTrees
+- `RNTupleReader` - A reader for RNTuple based files
+- `SIOReader` - The reader for reading files using the SIO backend
+- `SIOLegacyReader` - The reader for the SIO backend with an old podio format
+
+The `Legacy` readers are stated here mainly for completeness, in case you need
+to read a rather old file that still used the `EventStore` which has been
+removed from podio some time ago. See
 [here](#how-do-i-figure-out-if-a-file-is-legacy) for more information on how to
 figure out whether the file you are interested in is a legacy file or not.
-
 As podio is a rather low level tool, also the interface of these readers feel
 somewhat low level. This is mostly visible in the fact, that you have to provide
 a `category` (name) when getting the number of entries, or when reading the next
@@ -417,15 +444,13 @@ in podio do not return a `podio::Frame` directly, rather they just return some
 these things together, a simple event loop looks like this in c++:
 
 ```cpp
-#include "podio/ROOTFrameReader.h"
-#include "podio/ROOTLegacyReader.h" // For reading legacy files
+#include "podio/ROOTReader.h"
 #include "podio/Frame.h"
 
 #include "edm4hep/MCParticleCollection.h"
 
 int main() {
-  auto reader = podio::ROOTFrameReader();
-  // auto reader = podio::ROOTLegacyReader(); // For reading legacy files
+  auto reader = podio::ROOTReader();
   reader.openFile("some_file_containing_edm4hep_data.root");
   
   // Loop over all events

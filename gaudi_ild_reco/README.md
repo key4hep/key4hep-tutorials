@@ -21,7 +21,7 @@ originally.
 If you haven't done it yet, source a Key4hep software environment via
 
 ```bash
-source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
+source /cvmfs/sw.hsf.org/key4hep/setup.sh
 ```
 
 For the remainder of the tutorial we will assume that you are working within the
@@ -75,7 +75,7 @@ provide both options for convenience here.
 
 To run the simulation with EDM4hep output you can use the following command
 ```bash
-ddsim --compactFile $lcgeo_DIR/ILD/compact/ILD_l5_v02/ILD_l5_v02.xml \
+ddsim --compactFile $k4geo_DIR/ILD/compact/ILD_l5_v02/ILD_l5_v02.xml \
       --steeringFile ddsim_steer.py \
       --inputFiles zh_mumu.slcio \
       --outputFile zh_mumu_SIM.edm4hep.root
@@ -87,7 +87,7 @@ ddsim --compactFile $lcgeo_DIR/ILD/compact/ILD_l5_v02/ILD_l5_v02.xml \
 
 To run the simulation with LCIO output you can use the following command
 ``` bash
-ddsim --compactFile $lcgeo_DIR/ILD/compact/ILD_l5_v02/ILD_l5_v02.xml \
+ddsim --compactFile $k4geo_DIR/ILD/compact/ILD_l5_v02/ILD_l5_v02.xml \
       --steeringFile ddsim_steer.py \
       --inputFiles zh_mumu.slcio \
       --outputFile zh_mumu_SIM.slcio
@@ -103,10 +103,30 @@ minutes to complete. You can start this and read on in the meantime.
 
 To run the reconstruction we will use the Gaudi based Key4hep framework. Note
 that we can run the reconstruction just the same as within iLCSoft via `Marlin`.
-However, we will not show that in this tutorial. The first thing that we have to
-do is to create a so called *options file* for Gaudi.
+However, we will not show that in this tutorial.
+
+### Using `ILDReconstruction.py` from ILDConfig
+
+```bash
+k4run ILDReconstruction.py \
+      --detectorModel=ILD_l5_o1_v02 \
+      --inputFiles=zh_mumu_SIM.edm4hep.root \
+      --outputFileBase=zh_mumu
+```
 
 ### Creating a Gaudi options file
+
+```{warning}
+These instructions show you how to convert an existing Marlin steering file to a
+Gaudi options file using the full ILD reconstruction as an example since it
+exhibits a few of the potential issues that you might run into along the way.
+However, we **strongly recommend using the existing reconstruction configuration
+that is available from
+[ILDConfig](https://github.com/iLCSoft/ILDConfig/tree/master/StandardConfig/production)
+for actually running the reconstruction.** It has more features and also
+supports running with different detector models, something that the following
+steps will not achieve!.
+```
 
 The bulk of the work for creating such an options file from an existing Marlin
 steering file in XML format can be done with the

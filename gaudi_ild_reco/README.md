@@ -107,12 +107,37 @@ However, we will not show that in this tutorial.
 
 ### Using `ILDReconstruction.py` from ILDConfig
 
+In order to run the *standard reconstruction* simply run the following command
+
 ```bash
 k4run ILDReconstruction.py \
       --detectorModel=ILD_l5_o1_v02 \
       --inputFiles=zh_mumu_SIM.edm4hep.root \
       --outputFileBase=zh_mumu
 ```
+
+The `ILDReconstruction.py` configuration can handle several different ILD
+detector configurations, so we have to choose one via the `--detectorModel`
+argument. Make sure that this is compatible to the one that has been used for
+simulation.
+
+This will produce several new output files
+
+- `zh_mumu_REC.edm4hep.root` - The output of the reconstruction in EDM4hep
+  format
+- `zh_mumu_AIDA.root` - The histograms that were produce by wrapped processors
+  using the AIDA interface
+- `zh_mumu_PfoAnalysis.root` - The output file of the Pandora PFO analysis
+  processor
+
+`ILDReconstruction.py` also supports reading LCIO inputs and will detect this
+automatically from the input file name. It also supports producing LCIO output
+files via the `--lcioOutput` flag, which can either be `off` (default), `on` or
+`only` (for not producing any EMD4hep output).
+
+Check [the introduction to EDM4hep /
+podio](https://key4hep.github.io/key4hep-doc/how-tos/key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html)
+for more details on how to read and analyse this file.
 
 ### Creating a Gaudi options file
 

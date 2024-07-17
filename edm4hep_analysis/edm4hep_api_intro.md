@@ -486,20 +486,22 @@ The synopsis looks like this
 
 ``` console
 $podio-dump --help
-usage: podio-dump [-h] [-c CATEGORY] [-e ENTRIES] [-d] inputfile
+usage: podio-dump [-h] [-c CATEGORY] [-e ENTRIES] [-d] [--dump-edm DUMP_EDM] [--version] inputfile
 
 Dump contents of a podio file to stdout
 
 positional arguments:
   inputfile             Name of the file to dump content from
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -c CATEGORY, --category CATEGORY
                         Which Frame category to dump
   -e ENTRIES, --entries ENTRIES
                         Which entries to print. A single number, comma separated list of numbers or "first:last" for an inclusive range of entries. Defaults to the first entry.
   -d, --detailed        Dump the full contents not just the collection info
+  --dump-edm DUMP_EDM   Dump the specified EDM definition from the file in yaml format
+  --version             show program's version number and exit
 ```
 
 By default it prints how many events are present in the file and also a summary

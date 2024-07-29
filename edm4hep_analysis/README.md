@@ -13,7 +13,7 @@ Make sure that you are in a Key4hep software environment. If you are not yet, a
 simple way to get into one is to
 
 ```bash
-source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
+source /cvmfs/sw.hsf.org/key4hep/setup.sh
 ```
 
 afterwards create a working directory for this exercise

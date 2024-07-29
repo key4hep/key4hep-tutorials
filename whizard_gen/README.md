@@ -14,7 +14,7 @@ events for the process
 If you haven't done it yet, source a Key4hep software environment via
 
 ```bash
-source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
+source /cvmfs/sw.hsf.org/key4hep/setup.sh
 ```
 
 and create a working directory for this exercise:

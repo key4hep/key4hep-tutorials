@@ -281,7 +281,7 @@ objects can be obtained with the clone` method.
 ### Writing function interfaces
 The `Mutable` objects implicitly convert to an instance of a default class.
 Hence, **always use the default classes when specifying function interfaces**
-(obviously this only works if you only need read access in the function. **There
+(obviously this only works if you only need read access in the function). **There
 is no implicit conversion from the default, immutable objects to the `Mutable`
 objects!**
 
@@ -408,7 +408,7 @@ int main() {
 
   // Loop over all events
   for (size_t i = 0; i < reader.getEvents(); ++i) {
-    auto event = reader.readNextEvent());
+    auto event = reader.readNextEvent();
     auto& mcParticles = event.get<edm4hep::MCParticleCollection>("MCParticles");
 
     // do more stuff with this event

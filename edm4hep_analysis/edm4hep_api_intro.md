@@ -62,7 +62,7 @@ Clicking on any of these links will take you to the
 [`edm4hep.yaml`](https://github.com/key4hep/EDM4hep/blob/master/edm4hep.yaml)
 definition file of EDM4hep, jumping directly to the definition of the respective
 datatype or component. For more information on this file check out the section
-about [podio](#podio-the-technical-infrastructure-on-which-things-run). In
+about [podio](#podio---the-technical-infrastructure-on-which-things-run). In
 principle it is possible to have *very educated guesses* on how the interface of
 the classes will look like from this.
 
@@ -103,7 +103,7 @@ or [a slightly easier to digest
 summary](http://cginternals.github.io/guidelines/articles/almost-always-auto/)).
 To understand why these classes exist and what their purpose is, we have to make
 a slight detour to
-[podio](#podio-the-technical-infrastructure-on-which-things-run).
+[podio](#podio---the-technical-infrastructure-on-which-things-run).
 
 
 ### Some utility functionality
@@ -273,12 +273,10 @@ immutable read access, i.e. it provides only the `get` methods. Only the
 `Mutable` classes actually have the `set` methods, and can hence be used to
 actually modify objects. The most important implication of this is the
 following: **Everything that you read from file, or that you get from the Gaudi
-TES (in [gaudi](../gaudi/README.md#accessing-data-within-an-algorithm), or that
-you get from a [`Frame`](#the-podioframe-container)) is immutable.** I.e. there
-is no way for you to change or update the values that you read. The only way to
-"update" values (or collections) is to actually copy the contents and then store
-the updated values back. Independent copies of objects can be obtained with the
-`clone` method.
+TES is immutable.** I.e. there is no way for you to change or update the values
+that you read. The only way to "update" values (or collections) is to actually
+copy the contents and then store the updated values back. Independent copies of
+objects can be obtained with the clone` method.
 
 ### Writing function interfaces
 The `Mutable` objects implicitly convert to an instance of a default class.

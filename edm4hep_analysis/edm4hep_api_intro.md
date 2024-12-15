@@ -22,10 +22,10 @@ page](https://edm4hep.web.cern.ch):
 
 You see a diagrammatic overview of EDM4hep with all the available data types,
 broadly organized into different categories. The arrows depict two ways data
-types can be related / associated with each other 
+types can be related / linked with each other 
 
 - ["Relations"](#relations) (black arrows)
-- ["Associations"](#associations) (purple-ish arrows)
+- ["Links"](#links) (purple-ish arrows)
 
 #### Relations
 These are relations defined within the data types, and which are directly
@@ -41,20 +41,22 @@ is possible to go from one object to a related object, but vice versa this does
 usually not hold. For example, a `ReconstructedParticle` can point to multiple
 `Tracks` or `Clusters`, but those do not point to a `ReconstructedParticle`.
 
-#### Associations
+#### Links
 These are relations that are in a sense "external" to the data model definition.
 They are currently mainly used to connect MC and RECO information, as a direct
 link via a relation is not desirable as it would mix the two worlds. In contrast
-to relations, associations are not directed, i.e. it is possible to access both
-involved objects from the association.
+to relations, links are not directed, i.e. it is possible to access both
+involved objects from the link.
 
 ### The table of available types
 Just below the diagram is an overview table of all the types that are defined in
 EDM4hep. Here they are organized into
 
-- `Components` - very simple types, that are used throughout the
+- `Components` - Very simple types, that are used throughout the `Datatypes`
 - `Datatypes` - The data types that are defined in EDM4hep
-- `Association` - The available associations between different data types
+- `Links` - The available links between different data types
+- `Generator related (meta-)data` - Data types related to generator metadata
+- `Interfaces` - Abstractions for accessing different types by a shared set of properties
 
 ![](images/doxygen_type_table.png)
 

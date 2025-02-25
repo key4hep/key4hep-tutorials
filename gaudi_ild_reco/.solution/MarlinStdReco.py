@@ -1,18 +1,15 @@
 import os
 from Gaudi.Configuration import *
-
 from Configurables import (
-    PodioInput,
-    PodioOutput,
-    k4DataSvc,
     MarlinProcessorWrapper,
     EDM4hep2LcioTool,
     Lcio2EDM4hepTool,
 )
 from k4MarlinWrapper.parseConstants import *
 
+from k4FWCore import IOSvc
+
 algList = []
-evtsvc = k4DataSvc("EventDataSvc")
 
 
 CONSTANTS = {
@@ -134,9 +131,9 @@ CONSTANTS = {
 
 parseConstants(CONSTANTS)
 
-read = PodioInput()
-read.OutputLevel = INFO
-read.collections = [
+io_svc = IOSvc()
+io_svc.OutputLevel = INFO
+io_svc.CollectionNames = [
     "BeamCalCollection",
     "BeamCalCollectionContributions",
     "ECalBarrelScHitsEven",
@@ -187,8 +184,13 @@ read.collections = [
     "YokeEndcapsCollection",
     "YokeEndcapsCollectionContributions",
 ]
-
-algList.append(read)
+io_svc.Output = "zh_mumu_reco.edm4hep.root"
+io_svc.outputCommands = [
+    "drop *",
+    "keep MCParticlesSkimmed",
+    "keep PandoraPFOs",
+    "keep RecoMCTruthLink",
+]
 
 edm4hep2LcioConv = EDM4hep2LcioTool()
 edm4hep2LcioConv.collNameMapping = {"MCParticles": "MCParticle"}
@@ -1783,16 +1785,6 @@ lcio2edm4hepConv = Lcio2EDM4hepTool()
 lcio2edm4hepConv.collNameMapping = {"MCParticle": "MCParticles"}
 MyPfoAnalysis.Lcio2EDM4hepTool = lcio2edm4hepConv
 
-edm4hepOutput = PodioOutput()
-edm4hepOutput.OutputLevel = DEBUG
-edm4hepOutput.filename = "zh_mumu_reco.edm4hep.root"
-edm4hepOutput.outputCommands = [
-    "drop *",
-    "keep MCParticlesSkimmed",
-    "keep PandoraPFOs",
-    "keep RecoMCTruthLink",
-]
-
 
 algList.append(MyAIDAProcessor)
 algList.append(InitDD4hep)
@@ -1863,10 +1855,9 @@ algList.append(TOFEstimators100ps)
 algList.append(MyLCIOOutputProcessor)
 algList.append(DSTOutput)
 algList.append(MyPfoAnalysis)
-algList.append(edm4hepOutput)
 
-from Configurables import ApplicationMgr
+from k4FWCore import ApplicationMgr
 
 ApplicationMgr(
-    TopAlg=algList, EvtSel="NONE", EvtMax=10, ExtSvc=[evtsvc], OutputLevel=INFO
+    TopAlg=algList, EvtSel="NONE", EvtMax=10, ExtSvc=[], OutputLevel=INFO
 )

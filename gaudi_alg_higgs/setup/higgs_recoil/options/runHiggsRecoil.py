@@ -48,14 +48,14 @@ out.filename = "higgs_recoil_out.root"
 # If we don't specify the values for the name parameters
 # they will take the default value defined in the C++ code
 muon = MuonFilter("MuonFilter",
-                 InputPFOs="PandoraPFOs",
-                 OutputMuons="Muons",
+                 InputPFOs=["PandoraPFOs"],
+                 OutputMuons=["Muons"],
                  MinPt=10.0)
 
 recoil = HiggsRecoil("HiggsRecoil",
-                     InputMuons="Muons",
-                     HiggsCollection="Higgs",
-                     ZCollection="Z",
+                     InputMuons=["Muons"],
+                     HiggsCollection=["Higgs"],
+                     ZCollection=["Z"],
                      )
 
 ApplicationMgr(TopAlg=[inp, muon, recoil, out],

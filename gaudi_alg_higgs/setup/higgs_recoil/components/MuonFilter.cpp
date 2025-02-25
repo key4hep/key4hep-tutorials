@@ -18,23 +18,21 @@
  */
 
 #include "Gaudi/Property.h"
-#include "GaudiAlg/Transformer.h"
 
 #include "edm4hep/ReconstructedParticleCollection.h"
 #include "edm4hep/utils/kinematics.h"
 
-// Define BaseClass_t
-#include "k4FWCore/BaseClass.h"
+#include "k4FWCore/Transformer.h"
 
 #include <string>
 
 struct MuonFilter final
-  : Gaudi::Functional::Transformer<edm4hep::ReconstructedParticleCollection(const edm4hep::ReconstructedParticleCollection&), BaseClass_t> {
+  : public k4FWCore::Transformer<edm4hep::ReconstructedParticleCollection(const edm4hep::ReconstructedParticleCollection&)> {
   MuonFilter(const std::string& name, ISvcLocator* svcLoc)
       : Transformer(
             name, svcLoc,
-            {KeyValue("InputPFOs", "PandoraPFOs")},
-            {KeyValue("OutputMuons", "Muons")}) {
+            {KeyValues("InputPFOs", {"PandoraPFOs"})},
+            {KeyValues("OutputMuons", {"Muons"})}) {
   }
 
   edm4hep::ReconstructedParticleCollection operator()(const edm4hep::ReconstructedParticleCollection& recoColl) const override {

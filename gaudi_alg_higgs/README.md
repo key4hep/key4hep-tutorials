@@ -24,7 +24,7 @@ intermediate collection with the muons.
 
 First, we will need a key4hep setup, typically obtained by sourcing scripts from
 cvmfs, see the instructions
-[here](https://key4hep.github.io/key4hep-doc/setup-and-getting-started/README.html).
+[here](https://key4hep.github.io/key4hep-doc/getting_started/setup.html).
 After sourcing, check that the environment variable `KEY4HEP_STACK` is set to
 make sure the stack has been loaded correctly:
 

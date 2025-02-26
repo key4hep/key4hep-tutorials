@@ -243,7 +243,7 @@ It is necessary to adapt the Gaudi options file a bit further:
 - Near the end of the file replace the `from Configurables import ApplicationMgr` with `from k4FWCore import ApplicationMgr`.
     
 **For all of these steps make sure that you `import` all the necessary tools and
-algorithms from `Configurables`! Both `IOSvc` and `ApplicationMgr` services should be imported from `k4FWCore`.**
+algorithms from `Configurables`! Both `IOSvc` and `ApplicationMgr` services must be imported from `k4FWCore`.**
   
 The top of your file should now look something like this
 

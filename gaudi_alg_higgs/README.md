@@ -87,8 +87,8 @@ instructions for what algorithms we want to run, what parameters we want to pass
 them and other configuration like logging.
 
 There are several options that can be changed in the steering file that may be important:
-- The name of the input file is passed to the `IOSvc` service
-- The name of the output file is passed to the `IOSvc` service
+- The name of the input file is passed to the `PodioInput` plugin
+- The name of the output file is passed to the `PodioOutput` plugin
 - The number of events to process is passed to the `ApplicationMgr`. Choose `-1`
   not to limit it (all the events in the input file will be processed) or any
   other number to put a limit (sometimes useful for testing or debugging)

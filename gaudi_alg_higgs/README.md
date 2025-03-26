@@ -98,38 +98,50 @@ There are several options that can be changed in the steering file that may be i
   that it isn't defined.
 
 After the processing has ran, we'll have an output file. We can inspect the file
-with `podio-dump` to see which collections it has. By default it will be a long
-list of collections since the collections of the input file are kept:
+with `podio-dump` to see which collections it has. By default it will be a list of collections and parameters metadata:
 
-```
-$ podio-dump higgs_recoil_out.root
-BCalClusters                              edm4hep::Cluster                                0  bc95eab6
-BCalClusters_particleIDs                  edm4hep::ParticleID                             0  ce810ab9
-BCalRecoParticle                          edm4hep::ReconstructedParticle                  0  5d2cb360
-BCalRecoParticle_particleIDs              edm4hep::ParticleID                             0  2c09a289
-BuildUpVertex                             edm4hep::Vertex                                 0  4b3ce322
-BuildUpVertex_RP                          edm4hep::ReconstructedParticle                  0  c1ce60c0
-BuildUpVertex_RP_particleIDs              edm4hep::ParticleID                             0  6bc98df2
-BuildUpVertex_V0                          edm4hep::Vertex                                 0  77941bb6
-BuildUpVertex_V0_RP                       edm4hep::ReconstructedParticle                  0  5784a361
-BuildUpVertex_V0_RP_particleIDs           edm4hep::ParticleID                             0  0d56a0e7
-ClusterMCTruthLink                        edm4hep::MCRecoClusterParticleAssociation      81  e2727d90
+```txt
+input file: higgs_recoil_out.root
+            (written with podio version: 1.2.99)
+
+datamodel model definitions stored in this file: 
+ - edm4hep (0.99.99)
+
+Frame categories in this file:
+Name                      Entries
+----------------------  ---------
+metadata                        1
+events                       9400
+configuration_metadata          1
+################################### events: 0 ####################################
+Collections:
+Name         ValueType                         Size  ID
+-----------  ------------------------------  ------  --------
+Higgs        edm4hep::ReconstructedParticle       1  88d34b01
+Muons        edm4hep::ReconstructedParticle       2  aa8128c8
+PandoraPFOs  edm4hep::ReconstructedParticle      59  fa28d9be
+Z            edm4hep::ReconstructedParticle       1  3dbac09d
+
+Parameters:
+Name                            Type           Elements
+------------------------------  -----------  ----------
+_weight                         float                 1
+alphaQCD                        float                 1
+beam_particle1                  std::string           1
+beam_particle2                  std::string           1
+beamPDG1                        int                   1
+beamPDG2                        int                   1
+beamPol1                        float                 1
+beamPol2                        float                 1
+BeamSpectrum                    std::string           1
 ...
 ```
 
-by comparing with the input file we can see our two new collections that we
-created:
-```
-Higgs                                     edm4hep::ReconstructedParticle                  1  88d34b01
-Z                                         edm4hep::ReconstructedParticle                  1  3dbac09d
-```
+You can execute `podio-dump` using the input file and compare the results to confirm that all metadata is preserved in the output file.
 
 `podio-dump` has additional options (run with `-h` to see the complete list) to
 inspect more events and even to get the values of every member of every element
 of the collections.
-
-
-You can modify the number of threads.
 
 # Plotting in python
 

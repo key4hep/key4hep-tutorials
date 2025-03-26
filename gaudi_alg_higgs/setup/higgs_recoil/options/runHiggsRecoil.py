@@ -19,26 +19,31 @@
 
 from Gaudi.Configuration import INFO
 from Configurables import HiggsRecoil, MuonFilter
-from k4FWCore import ApplicationMgr, IOSvc
+from Configurables import ApplicationMgr
+from Configurables import k4DataSvc
+from Configurables import PodioOutput
+from Configurables import PodioInput
 
-io_svc = IOSvc()
-io_svc.Input = "rv02-02.sv02-02.mILD_l5_o1_v02.E250-SetA.I402004.Pe2e2h.eR.pL.n000.d_dstm_15090_0.edm4hep.root"
+data_svc = k4DataSvc("EventDataSvc")
+data_svc.input = "/home/juanmi/Downloads/ZH_40_events_ILD_DST_merged.edm4hep.root"
 
-io_svc.CollectionNames = [
+inp = PodioInput()
+inp.collections = [
     "PandoraPFOs",
 ]
 
-io_svc.outputCommands = [
+out = PodioOutput("out")
+out.outputCommands = [
     "drop *",
     "keep Muons",
     "keep PandoraPFOs",
     "keep Z",
     "keep Higgs",
 ]
-io_svc.Output = "higgs_recoil_out.root"
+out.filename = "higgs_recoil_out.root"
 
 # The collections that we don't drop will be present in the output file
-# io_svc.outputCommands = ["drop Collection1"]
+# out.outputCommands = ["drop Collection1"]
 
 # If we don't specify the values for the name parameters
 # they will take the default value defined in the C++ code
@@ -53,9 +58,9 @@ recoil = HiggsRecoil("HiggsRecoil",
                      ZCollection=["Z"],
                      )
 
-ApplicationMgr(TopAlg=[muon, recoil],
+ApplicationMgr(TopAlg=[inp, muon, recoil, out],
                EvtSel="NONE",
                EvtMax=-1,
-               ExtSvc=[],
+               ExtSvc=[data_svc],
                OutputLevel=INFO,
                )

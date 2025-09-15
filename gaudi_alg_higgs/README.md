@@ -87,8 +87,8 @@ instructions for what algorithms we want to run, what parameters we want to pass
 them and other configuration like logging.
 
 There are several options that can be changed in the steering file that may be important:
-- The name of the input file is passed to the `PodioInput` plugin
-- The name of the output file is passed to the `PodioOutput` plugin
+- The name of the input file is passed to the `IOSvc` plugin
+- The name of the output file is passed to the `IOSvc` plugin
 - The number of events to process is passed to the `ApplicationMgr`. Choose `-1`
   not to limit it (all the events in the input file will be processed) or any
   other number to put a limit (sometimes useful for testing or debugging)
@@ -102,38 +102,33 @@ with `podio-dump` to see which collections it has. By default it will be a list 
 
 ```txt
 input file: higgs_recoil_out.root
-            (written with podio version: 1.2.99)
+            (written with podio version: 1.3.0)
 
-datamodel model definitions stored in this file: 
- - edm4hep (0.99.99)
+datamodel model definitions stored in this file:
+ - edm4hep (0.99.2)
 
 Frame categories in this file:
-Name                      Entries
-----------------------  ---------
-metadata                        1
-events                       9400
-configuration_metadata          1
+Name                    Entries
+----------------------  -------
+metadata                1        
+events                  9400     
+configuration_metadata  1        
 ################################### events: 0 ####################################
 Collections:
-Name         ValueType                         Size  ID
------------  ------------------------------  ------  --------
-Higgs        edm4hep::ReconstructedParticle       1  88d34b01
-Muons        edm4hep::ReconstructedParticle       2  aa8128c8
-PandoraPFOs  edm4hep::ReconstructedParticle      59  fa28d9be
-Z            edm4hep::ReconstructedParticle       1  3dbac09d
+Name         ValueType                       Size  ID
+-----------  ------------------------------  ----  --------
+Higgs        edm4hep::ReconstructedParticle  1     88d34b01
+Muons        edm4hep::ReconstructedParticle  2     aa8128c8
+PandoraPFOs  edm4hep::ReconstructedParticle  59    fa28d9be
+Z            edm4hep::ReconstructedParticle  1     3dbac09d
 
 Parameters:
-Name                            Type           Elements
-------------------------------  -----------  ----------
-_weight                         float                 1
-alphaQCD                        float                 1
-beam_particle1                  std::string           1
-beam_particle2                  std::string           1
-beamPDG1                        int                   1
-beamPDG2                        int                   1
-beamPol1                        float                 1
-beamPol2                        float                 1
-BeamSpectrum                    std::string           1
+Name                            Type         Elements
+------------------------------  -----------  -------
+beamPDG1                        int          1
+beamPDG2                        int          1
+Event Number                    int          1
+GenFileSerialNumber             int          1
 ...
 ```
 

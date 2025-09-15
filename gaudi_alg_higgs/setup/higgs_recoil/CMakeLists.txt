@@ -7,7 +7,6 @@ set(sources components/HiggsRecoil.cpp
 gaudi_add_module(tutorial
                  SOURCES ${sources}
                  LINK Gaudi::GaudiKernel
-                      Gaudi::GaudiAlgLib
                       k4FWCore::k4FWCore
                       EDM4HEP::edm4hep
                       EDM4HEP::utils

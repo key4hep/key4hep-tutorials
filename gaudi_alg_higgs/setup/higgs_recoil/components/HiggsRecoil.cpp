@@ -18,30 +18,39 @@
  */
 
 #include "Gaudi/Property.h"
-#include "GaudiAlg/Transformer.h"
 #include "Gaudi/Accumulators/Histogram.h"
 #include "Gaudi/Histograming/Sink/Utils.h"
 
 #include "edm4hep/ReconstructedParticleCollection.h"
 #include "edm4hep/utils/kinematics.h"
 
-// Define BaseClass_t
-#include "k4FWCore/BaseClass.h"
+#include "k4FWCore/Transformer.h"
 
 #include "TH1D.h"
 
 #include <string>
 
+// histogram compatibility when older version of Gaudi is used
+#include "GAUDI_VERSION.h"
+#if GAUDI_MAJOR_VERSION < 39
+namespace Gaudi::Accumulators {
+  template <unsigned int ND, atomicity Atomicity = atomicity::full, typename Arithmetic = double>
+  using StaticHistogram =
+      Gaudi::Accumulators::HistogramingCounterBase<ND, Atomicity, Arithmetic, naming::histogramString,
+                                                   HistogramingAccumulator>;
+}
+#endif
+
 struct HiggsRecoil final
-  : Gaudi::Functional::MultiTransformer<std::tuple<edm4hep::ReconstructedParticleCollection,
+  : k4FWCore::MultiTransformer<std::tuple<edm4hep::ReconstructedParticleCollection,
                                                    edm4hep::ReconstructedParticleCollection>
-                                        (const edm4hep::ReconstructedParticleCollection&), BaseClass_t> {
+                                        (const edm4hep::ReconstructedParticleCollection&)> {
   HiggsRecoil(const std::string& name, ISvcLocator* svcLoc)
       : MultiTransformer(
             name, svcLoc,
-            {KeyValue("InputMuons", "Muons")},
-            {KeyValue("HiggsCollection", "Higgs"),
-             KeyValue("ZCollection", "Z")}) {
+            {KeyValues("InputMuons", {"Muons"})},
+            {KeyValues("HiggsCollection", {"Higgs"}),
+             KeyValues("ZCollection", {"Z"})}) {
   }
 
   std::tuple<edm4hep::ReconstructedParticleCollection,
@@ -85,8 +94,8 @@ struct HiggsRecoil final
   // Thread-safe custom histograms from Gaudi
   // 1 is the dimension of the histogram
   // Here "Higgs mass" is the title of the histogram, then we pass the bins and the axis labels
-  mutable Gaudi::Accumulators::Histogram<1> higgsHist{this, "", "Higgs mass", {100, 0., 250., "m_{H} [GeV];Entries"}};
-  mutable Gaudi::Accumulators::Histogram<1> zHist{this, "", "Z mass", {100, 0., 250., "m_{Z} [GeV];Entries"}};
+  mutable Gaudi::Accumulators::StaticHistogram<1> higgsHist{this, "", "Higgs mass", {100, 0., 250., "m_{H} [GeV];Entries"}};
+  mutable Gaudi::Accumulators::StaticHistogram<1> zHist{this, "", "Z mass", {100, 0., 250., "m_{Z} [GeV];Entries"}};
 
   /* We are going to leave thread-safe histogramming commented out since
      the version of Gaudi installed in the stack is not recent enough. Once a

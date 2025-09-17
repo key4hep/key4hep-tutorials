@@ -1859,5 +1859,8 @@ algList.append(MyPfoAnalysis)
 from k4FWCore import ApplicationMgr
 
 ApplicationMgr(
-    TopAlg=algList, EvtSel="NONE", EvtMax=10, ExtSvc=[io_svc], OutputLevel=INFO
+    TopAlg=algList,
+    EvtSel="NONE",
+    EvtMax=10,
+    OutputLevel=INFO,
 )

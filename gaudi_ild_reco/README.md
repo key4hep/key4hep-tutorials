@@ -228,16 +228,9 @@ resp. The corresponding filename constants values in `CONSTANTS`.
 ### Adapting the options file for EDM4hep
 
 It is necessary to adapt the Gaudi options file a bit further:
-- Replace the `LcioEvent` algorithm with the `PodioInput` algorithm 
-  - Make sure to replace the `Files` option with the `collections` option and to
-    populate this option with the list of collections you want to read (see
-    below)
-- Replace the `EventDataSvc` with the `k4DataSvc` (remember to instantiate it
-  with `"EventDataSvc"` as name)
-- Add a `PodioOutput` algorithm to write EDM4hep output (don't forget to add it
-  to the `algList` at the very end)
-  - (For the sake of this exercise) configure this to only write the
-    `MCParticlesSkimmed`, `PandoraPFOs` and the `RecoMCTruthLink` collections
+- Remove the `LcioEvent` algorithm and create the `IOSvc` service
+  - Populate the `CollectionNames` property of `IOSvc` with the list of collections you want to read (see below).
+  - Use `Output` property of `IOSvc` to specify to which file write the EDM4hep output. (For the sake of this exercise) configure the `outputCommands` property to only write the `MCParticlesSkimmed`, `PandoraPFOs` and the `RecoMCTruthLink` collections.
 - Attach the necessary in-memory on-the-fly converters between EDM4hep and LCIO
   (and vice versa)
   - For the conversion of the EDM4hep inputs to LCIO instantiate a
@@ -247,33 +240,42 @@ It is necessary to adapt the Gaudi options file a bit further:
     `Lcio2EDM4hepTool` and attach it to the last wrapped processor that is run
     before the `PodioOutput` algorithm that you just added (`MyPfoAnalysis`).
     Also see below.
+- Near the end of the file replace the `from Configurables import ApplicationMgr` with `from k4FWCore import ApplicationMgr`.
     
 **For all of these steps make sure that you `import` all the necessary tools and
-algorithms from `Configurables`!**
+algorithms from `Configurables`! Both `IOSvc` and `ApplicationMgr` services must be imported from `k4FWCore`.**
   
 The top of your file should now look something like this
 
 ```python
 from Configurables import (
-    PodioInput, PodioOutput, k4DataSvc, MarlinProcessorWrapper,
+    MarlinProcessorWrapper,
     EDM4hep2LcioTool, Lcio2EDM4hepTool
     )
 from k4MarlinWrapper.parseConstants import *
+from k4FWCore import IOSvc
+
 algList = []
-evtsvc = k4DataSvc("EventDataSvc")
+
+io_svc = IOSvc()
+io_svc.OutputLevel = INFO
+io_svc.CollectionNames = [
+    # ... list of collection names
+]
+
+io_svc.Output = "zh_mumu_reco.edm4hep.root"
+io_svc.outputCommands = [
+    "drop *",
+    "keep MCParticlesSkimmed",
+    "keep PandoraPFOs",
+    "keep RecoMCTruthLink",
+]
 ```
 
-while the configuration for the input reader and the `EDM4hep2LcioTool` should
+while the configuration for the `EDM4hep2LcioTool` should
 look like this
 
 ```python
-read = PodioInput()
-read.OutputLevel = INFO
-read.collections = [
-    # ... list of collection names
-]
-algList.append(read)
-
 edm4hep2LcioConv = EDM4hep2LcioTool()
 edm4hep2LcioConv.collNameMapping = {
     "MCParticles": "MCParticle"
@@ -290,7 +292,7 @@ The list of collections that is populated by standard configuration of ILD for
 simulation looks like this. You can simply copy this into the options file
 
 ```python
-read.collections = [
+io_svc.CollectionNames = [
      "BeamCalCollection",
      "BeamCalCollectionContributions",
      "ECalBarrelScHitsEven",
@@ -345,8 +347,7 @@ read.collections = [
 
 :::
 
-Finally, the `PodioOutput` algorithm and the `Lcio2EDM4hepTool` can be
-configuration should look something like this
+Finally, the `Lcio2EDM4hepTool` configuration and `ApplicationMgr` should look something like this
 
 ```python
 # ... MyPfoAnalysis configuration unchanged
@@ -357,28 +358,25 @@ lcio2edm4hepConv.collNameMapping = {
 }
 MyPfoAnalysis.Lcio2EDM4hepTool = lcio2edm4hepConv
 
-edm4hepOutput = PodioOutput()
-edm4hepOutput.filename = "zh_mumu_reco.edm4hep.root"
-edm4hepOutput.outputCommands = [
-    "drop *",
-    "keep MCParticlesSkimmed",
-    "keep PandoraPFOs",
-    "keep RecoMCTruthLink",
-]
+# algList unchanged
 
-# ... the complete algList
-algList.append(edm4hepOutput)
+from k4FWCore import ApplicationMgr
 
-# ... ApplicationMgr config
+ApplicationMgr(
+    TopAlg=algList,
+    EvtSel="NONE",
+    EvtMax=10,
+    OutputLevel=INFO,
+)
 ```
 
 ### Running the reconstruction with `k4run`
 
-After all these adaptions it is now possible to run the full reconstruction
+After all these adaptations it is now possible to run the full reconstruction
 chain on the previously simulated input with `k4run`
 
 ```bash
-k4run MarlinStdReco.py --num-events=3 --EventDataSvc.input=zh_mumu_SIM.edm4hep.root
+k4run MarlinStdReco.py --num-events=3 --IOSvc.Input=zh_mumu_SIM.edm4hep.root
 ```
 
 Here we are again using the command line to specify the input file, we could
@@ -388,6 +386,6 @@ for [this issue](https://github.com/key4hep/k4MarlinWrapper/issues/94).
 
 You should now have a `zh_mumu_reco.edm4hep.root` file that contains the
 complete events in all their glory. For a more practical output you can tweak
-the `edm4hepOutput.outputCommands` option in order to keep only "interesting"
+the `io_svc.outputCommands` option in order to keep only "interesting"
 collections. Also note that the REC and DST LCIO output files are still
 produced. Can you reproduce these data tiers for EDM4hep?

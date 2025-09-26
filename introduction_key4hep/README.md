@@ -122,7 +122,7 @@ Finally Marlin provides the framework to call all existing reconstruction and an
 
 
 - more Key4hep relatad talks:
-  - [https://key4hep.github.io/key4hep-doc/talks-and-presentations/README.html](https://key4hep.github.io/key4hep-doc/talks-and-presentations/README.html)
+  - [https://key4hep.github.io/key4hep-doc/main/talks-and-presentations/README.html](https://key4hep.github.io/key4hep-doc/main/talks-and-presentations/README.html)
 
 ---
 

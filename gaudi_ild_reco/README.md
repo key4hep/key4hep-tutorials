@@ -136,7 +136,7 @@ files via the `--lcioOutput` flag, which can either be `off` (default), `on` or
 `only` (for not producing any EMD4hep output).
 
 Check [the introduction to EDM4hep /
-podio](https://key4hep.github.io/key4hep-doc/how-tos/key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html)
+podio](https://key4hep.github.io/key4hep-doc/main/how-tos/key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html)
 for more details on how to read and analyse this file.
 
 ### Creating a Gaudi options file

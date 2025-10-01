@@ -47,17 +47,9 @@ cd key4hep-tutorials/gaudi_alg_higgs/setup
 We'll work from the `setup` directory in this folder. Once there, run
 
 ```
-mkdir build
-cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=../install
-cmake --build . -j $(nproc) -t install 
-cd ../install
-export PATH=$PWD/bin:$PATH
-export LD_LIBRARY_PATH=$PWD/lib:$PWD/lib64:$LD_LIBRARY_PATH
-export ROOT_INCLUDE_PATH=$PWD/include:$ROOT_INCLUDE_PATH
-export PYTHONPATH=$PWD/python:$PYTHONPATH
-export CMAKE_PREFIX_PATH=$PWD:$CMAKE_PREFIX_PATH
-cd ../
+cmake -B build -S . -DCMAKE_INSTALL_PREFIX=$(pwd)/install
+cmake --build build -j $(nproc) -t install
+k4_local_repo
 ```
 
 Now we should have compiled our code. Two C++ files will have been compiled:

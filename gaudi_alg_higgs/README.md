@@ -92,7 +92,8 @@ There are several options that can be changed in the steering file that may be i
 After the processing has ran, we'll have an output file. We can inspect the file
 with `podio-dump` to see which collections it has. By default it will be a list of collections and parameters metadata:
 
-```txt
+```console
+$ podio-dump higgs_recoil_out.root
 input file: higgs_recoil_out.root
             (written with podio version: 1.3.0)
 

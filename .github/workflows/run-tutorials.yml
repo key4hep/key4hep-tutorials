@@ -1,0 +1,30 @@
+name: Run Tutorials
+
+on:
+  push:
+    branches:
+    pull_request:
+    workflow_dispatch:
+    schedule:
+    - cron: '16 5 * * 1'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ild-reconstruction:
+    runs-on: ubuntu-latest
+    container:
+      image:
+        ghcr.io/key4hep/key4hep-images/alma9-cvmfs:latest
+      options: --privileged
+
+    steps:
+      - uses: actions/checkout@v5
+      - run: |
+          /mount.sh && source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
+          mkdir testdir
+          cd testdir
+          cp ${GITHUB_WORKSPACE}/gaudi_ild_reco/README.md .
+          ${GITHUB_WORKSPACE}/.github/scripts/run_commands_in_md README.md

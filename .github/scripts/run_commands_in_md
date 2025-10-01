@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+"""Quick & Dirty script to get the bash commands from a markdown file and run them"""
+
+import argparse
+import re
+import subprocess
+import shlex
+
+from typing import List
+from pathlib import Path
+
+
+def get_commands(
+    mdfile: Path, exclude_patterns: List[str] = None, cell_type: str = "bash"
+) -> List[str]:
+    """Get all commands (assuming they are all on the same line) from the
+    markdown file in the given cell_type. Filtering out commands that match any
+    of the patterns in exclude_patterns
+    """
+    # Thanks ChatGPT
+    file_content = Path(mdfile).read_text()
+    cell_content_rgx = re.compile(rf"```{cell_type}(.*?)```", re.DOTALL)
+    cell_code_blocks = cell_content_rgx.findall(file_content)
+
+    exclude_rgxs = [re.compile(r"^#")]
+    if exclude_patterns:
+        exclude_rgxs.extend([re.compile(p) for p in exclude_patterns])
+
+    def _excluded(cmd: str):
+        return any(r.search(cmd) for r in exclude_rgxs)
+
+    return [
+        line
+        for block in cell_code_blocks
+        for line in block.splitlines()
+        if line and not _excluded(line)
+    ]
+
+
+def run_commands(cmds: List[str]) -> None:
+    """Run all the commands that have been found. Assume that there are only
+    runnable commands left in cmds!"""
+    for cmd in cmds:
+        try:
+            result = subprocess.run(
+                shlex.split(cmd), check=True, capture_output=True, text=True
+            )
+            print(f"Command: {cmd}\n{result.stdout}")
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing command: {cmd}\nError: {e.stderr}")
+        except FileNotFoundError as fnf_error:
+            print(f"Command not found: {cmd}\nError: {fnf_error}")
+
+
+def main():
+    """Main"""
+    parser = argparse.ArgumentParser(
+        description="Script to parse and run commands from a markdown file"
+    )
+    parser.add_argument("inputfile", help="name of the input markdown file", type=Path)
+    parser.add_argument(
+        "-x",
+        "--exclude",
+        action="append",
+        type=str,
+        help="pattern to use for commands that should not be executed",
+    )
+    parser.add_argument(
+        "-t",
+        "--celltype",
+        type=str,
+        default="bash",
+        help="Which cell type to execute",
+    )
+    args = parser.parse_args()
+
+    cmds = get_commands(args.inputfile, args.exclude, args.celltype)
+    run_commands(cmds)
+
+
+if __name__ == "__main__":
+    main()

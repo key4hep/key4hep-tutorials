@@ -1,8 +1,8 @@
 #include "RecoParticleFilter.hpp"
 
 RecoParticleFilter::RecoParticleFilter(const std::string& name, ISvcLocator* svcLoc)
-    : Transformer(name, svcLoc, {KeyValues("InputPFOs", {"PandoraPFOs"})},
-                  {KeyValues("OutputParticles", {"FilteredParticles"})}) {}
+    : Transformer(name, svcLoc, {KeyValues("InputCollection", {"PandoraPFOs"})},
+                  {KeyValues("OutputCollection", {"FilteredParticles"})}) {}
 
 edm4hep::ReconstructedParticleCollection
 RecoParticleFilter::operator()(const edm4hep::ReconstructedParticleCollection& recoColl) const {

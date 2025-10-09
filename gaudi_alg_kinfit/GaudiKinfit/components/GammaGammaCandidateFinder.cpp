@@ -118,7 +118,7 @@ GammaGammaCandidateFinder::performKinematicFit(const edm4hep::LorentzVectorE& ga
   if (errorCode == 0) {
     FitResult result;
     result.fitProbability = fit_probability;
-    result.fittedParticle = {j1.getPx() + j2.getPx(), j1.getPy() + j1.getPy(), j1.getPz() + j2.getPz(),
+    result.fittedParticle = {j1.getPx() + j2.getPx(), j1.getPy() + j2.getPy(), j1.getPz() + j2.getPz(),
                              j1.getE() + j2.getE()};
 
     // Store covariance matrix if available

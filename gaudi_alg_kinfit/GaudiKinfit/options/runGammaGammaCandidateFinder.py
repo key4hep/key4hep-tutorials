@@ -9,7 +9,7 @@ iosvc = IOSvc()
 # Configure the RecoParticleFilter to filter photons
 photon_filter = RecoParticleFilter("PhotonFilter")
 photon_filter.PDG = 22  # Photon PDG ID
-photon_filter.MinPt = 0.5  # Minimum pT in GeV
+photon_filter.MinE = 0.5  # Minimum energy in GeV
 photon_filter.InputCollection = ["PandoraPFOs"]
 photon_filter.OutputCollection = ["FilteredPhotons"]
 
@@ -29,6 +29,7 @@ pi0_filter.MinPt = 1.0
 pi0_filter.InputCollection = gamma_gamma_finder.OutputCollection
 pi0_filter.OutputCollection = ["Pi0s_New"]
 
+iosvc.Output = "pi0_candidates.root"
 iosvc.outputCommands = [
     "drop *",
     "keep PandoraPFOs",

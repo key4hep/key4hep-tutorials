@@ -18,5 +18,6 @@ struct RecoParticleFilter final : public k4FWCore::Transformer<edm4hep::Reconstr
 
   Gaudi::Property<int> m_pdgId{this, "PDG", 13,
                                "PDG ID of particles to filter (will use the absolute value for filtering)"};
-  Gaudi::Property<double> m_minPt{this, "MinPt", 10., "Minimum pT of particles to be considered in GeV"};
+  Gaudi::Property<double> m_minPt{this, "MinPt", 0., "Minimum pT of particles to be considered in GeV"};
+  Gaudi::Property<double> m_minE{this, "MinE", 0., "Minimum energy of particles to be considered in GeV"};
 };

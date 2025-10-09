@@ -1,5 +1,7 @@
 #include "RecoParticleFilter.hpp"
 
+#include <fmt/format.h>
+
 RecoParticleFilter::RecoParticleFilter(const std::string& name, ISvcLocator* svcLoc)
     : Transformer(name, svcLoc, {KeyValues("InputCollection", {"PandoraPFOs"})},
                   {KeyValues("OutputCollection", {"FilteredParticles"})}) {}
@@ -16,25 +18,26 @@ RecoParticleFilter::operator()(const edm4hep::ReconstructedParticleCollection& r
 
   int nParticles = 0;
   for (const auto& reco : recoColl) {
+    verbose()
+        << fmt::format(
+               "Checking particle: PDG={}, mass={:.4f} GeV, energy={:.4f} GeV, momentum=({:.4f}, {:.4f}, {:.4f}) GeV",
+               reco.getPDG(), reco.getMass(), reco.getEnergy(), reco.getMomentum().x, reco.getMomentum().y,
+               reco.getMomentum().z)
+        << endmsg;
+
     if (std::abs(reco.getPDG()) == std::abs(m_pdgId)) {
       const auto particlePt = edm4hep::utils::pt(reco);
-      if (particlePt > m_minPt) {
+      const auto particleE = reco.getEnergy();
+      if (particlePt > m_minPt && particleE > m_minE) {
         ret.push_back(reco);
-        verbose() << "Particle with PDG " << reco.getPDG() << " and pt " << particlePt << " GeV "
-                  << "and mass " << reco.getMass() << " GeV "
-                  << "and energy " << reco.getEnergy() << " GeV "
-                  << "and momentum " << reco.getMomentum()[0] << " " << reco.getMomentum()[1] << " "
-                  << reco.getMomentum()[2] << " GeV "
-                  << "added to collection" << endmsg;
         nParticles++;
-      } else {
-        verbose() << "Particle with PDG " << reco.getPDG() << " and pt " << particlePt
-                  << " GeV, not considered due to minimum pT cut of " << m_minPt.value() << endmsg;
       }
     }
   }
-  debug() << "Found " << nParticles << " particles with PDG " << m_pdgId.value() << " (pT > " << m_minPt.value()
-          << " GeV) in " << recoColl.size() << " reconstructed particle " << endmsg;
+  debug() << fmt::format(
+                 "Found {} particles with PDG {} and pT > {} GeV and E > {} GeV in {} input reconstructed particles",
+                 nParticles, m_pdgId.value(), m_minPt.value(), m_minE.value(), recoColl.size())
+          << endmsg;
 
   return ret;
 }

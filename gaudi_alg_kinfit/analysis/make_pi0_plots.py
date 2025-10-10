@@ -57,6 +57,8 @@ if __name__ == "__main__":
     parser.add_argument("inputfile", help="The input file with the data")
     parser.add_argument(
         "outputfile",
+        nargs="?",
+        default="pi0_histograms.root",
         help="The output file into which the histograms will be stored",
     )
 

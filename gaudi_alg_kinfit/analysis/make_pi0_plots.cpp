@@ -12,16 +12,21 @@
 #include <string>
 
 int main(int argc, char* argv[]) {
-  if (argc != 3) {
-    std::cerr << "Usage: " << argv[0] << " <inputfile> <outputfile>" << std::endl;
+  if (argc < 2) {
+    std::cerr << "Usage: " << argv[0] << " <inputfile> [outputfile]" << std::endl;
     return 1;
+  }
+
+  std::string outputfile = "pi0_histograms_cpp.root";
+  if (argc == 3) {
+    outputfile = argv[2];
   }
 
   // Open input file
   auto reader = podio::makeReader(argv[1]);
 
   // Create output file and histograms
-  auto histfile = std::make_unique<TFile>(argv[2], "recreate");
+  auto histfile = std::make_unique<TFile>(outputfile.c_str(), "recreate");
 
   auto pi0_mass = TH1D("m_pi0_mass", ";M_{#pi^{0}};Entries", 100, 0.130, 0.139);
   auto pi0_mass_p4 = TH1D("m_pi0_p4", ";M_{#gamma#gamma};Entries", 100, 0.130, 0.139);
@@ -60,7 +65,7 @@ int main(int argc, char* argv[]) {
 
   histfile->Close();
 
-  std::cout << "Analysis complete. Output written to " << argv[2] << std::endl;
+  std::cout << "Analysis complete. Output written to " << outputfile << std::endl;
 
   return 0;
 }

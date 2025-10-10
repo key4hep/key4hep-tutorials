@@ -43,6 +43,8 @@ iosvc.outputCommands = [
     "keep FilteredPhotons",
     "keep *_New",
     "keep MCParticles",
+    "drop *_startVertices",
+    "drop *Eta*",
 ]
 
 # Use Gaudi Auditor service to get timing information on algorithm execution

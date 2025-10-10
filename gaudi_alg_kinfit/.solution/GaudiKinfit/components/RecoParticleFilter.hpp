@@ -3,7 +3,6 @@
 #include "Gaudi/Property.h"
 
 #include "edm4hep/ReconstructedParticleCollection.h"
-#include "edm4hep/utils/kinematics.h"
 
 #include "k4FWCore/Transformer.h"
 

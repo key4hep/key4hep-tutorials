@@ -1,5 +1,7 @@
 #include "RecoParticleFilter.hpp"
 
+#include "edm4hep/utils/kinematics.h"
+
 #include <fmt/format.h>
 
 RecoParticleFilter::RecoParticleFilter(const std::string& name, ISvcLocator* svcLoc)

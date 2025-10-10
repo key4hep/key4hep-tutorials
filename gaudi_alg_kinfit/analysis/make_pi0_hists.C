@@ -3,7 +3,7 @@
 
 #include <podio/Reader.h>
 
-void make_pi0_plots() {
+void make_pi0_hists() {
   auto reader = podio::makeReader("pi0_candidates.root");
 
   auto histfile = new TFile("pi0_histograms_macro.root", "recreate");

@@ -15,10 +15,10 @@ def main(args):
     events = reader.get("events")
 
     histfile = ROOT.TFile(args.outputfile, "recreate")
-    pi0_mass = ROOT.TH1D("m_pi0_mass", ";M_{#pi^{0}};Entries", 100, 0.130, 0.139)
-    pi0_mass_p4 = ROOT.TH1D("m_pi0_p4", ";M_{#gamma#gamma};Entries", 100, 0.130, 0.139)
+    pi0_mass = ROOT.TH1D("pi0_mass", ";M_{#pi^{0}};Entries", 100, 0.130, 0.139)
+    pi0_mass_p4 = ROOT.TH1D("pi0_p4", ";M_{#gamma#gamma};Entries", 100, 0.130, 0.139)
     pi0_mass_prefit = ROOT.TH1D(
-        "m_pi0_mass_prefit", ";M_{#gamma#gamma} (prefit);Entries", 100, 0.1, 0.19
+        "pi0_mass_prefit", ";M_{#gamma#gamma} (prefit);Entries", 100, 0.1, 0.19
     )
     fit_delta_m = ROOT.TH1D(
         "fit_delta_m",

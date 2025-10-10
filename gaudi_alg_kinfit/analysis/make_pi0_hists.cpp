@@ -28,9 +28,9 @@ int main(int argc, char* argv[]) {
   // Create output file and histograms
   auto histfile = std::make_unique<TFile>(outputfile.c_str(), "recreate");
 
-  auto pi0_mass = TH1D("m_pi0_mass", ";M_{#pi^{0}};Entries", 100, 0.130, 0.139);
-  auto pi0_mass_p4 = TH1D("m_pi0_p4", ";M_{#gamma#gamma};Entries", 100, 0.130, 0.139);
-  auto pi0_mass_prefit = TH1D("m_pi0_mass_prefit", ";M_{#gamma#gamma} (prefit);Entries", 100, 0.1, 0.19);
+  auto pi0_mass = TH1D("pi0_mass", ";M_{#pi^{0}};Entries", 100, 0.130, 0.139);
+  auto pi0_mass_p4 = TH1D("pi0_p4", ";M_{#gamma#gamma};Entries", 100, 0.130, 0.139);
+  auto pi0_mass_prefit = TH1D("pi0_mass_prefit", ";M_{#gamma#gamma} (prefit);Entries", 100, 0.1, 0.19);
   auto fit_delta_m =
       TH1D("fit_delta_m", ";M_{#gamma#gamma} (postfit) - M_{#gamma#gamma} (prefit);Entries", 100, -0.1, 0.1);
 

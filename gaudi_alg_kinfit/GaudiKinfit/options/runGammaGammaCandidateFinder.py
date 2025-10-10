@@ -2,7 +2,13 @@
 
 from Gaudi.Configuration import INFO
 from k4FWCore import ApplicationMgr, IOSvc
-from Configurables import RecoParticleFilter, GammaGammaCandidateFinder, EventDataSvc
+from Configurables import (
+    RecoParticleFilter,
+    GammaGammaCandidateFinder,
+    EventDataSvc,
+    AuditorSvc,
+    AlgTimingAuditor,
+)
 
 iosvc = IOSvc()
 
@@ -39,11 +45,19 @@ iosvc.outputCommands = [
     "keep MCParticles",
 ]
 
+# Use Gaudi Auditor service to get timing information on algorithm execution
+auditorSvc = AuditorSvc()
+auditorSvc.Auditors = [AlgTimingAuditor()]
+
 # Configure the application manager
-ApplicationMgr(
+app_mgr = ApplicationMgr(
     TopAlg=[photon_filter, gamma_gamma_finder, pi0_filter],
     EvtSel="NONE",
     EvtMax=-1,
-    ExtSvc=[EventDataSvc("EventDataSvc")],
+    ExtSvc=[EventDataSvc(), auditorSvc],
     OutputLevel=INFO,
 )
+
+app_mgr.AuditAlgorithms = True
+app_mgr.AuditTools = True
+app_mgr.AuditServices = True

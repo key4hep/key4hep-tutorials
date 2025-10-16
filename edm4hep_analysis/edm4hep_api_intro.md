@@ -12,6 +12,129 @@ to give you the knowledge to make sense of it.
 - podio documentation page (including API reference): [key4hep.web.cern.ch/podio](https://key4hep.web.cern.ch/podio)
 - podio github repository: [github.com/AIDASoft/podio](https://github.com/AIDASoft/podio)
 
+## Reading EDM4hep files
+EDM4hep is implemented using the podio toolkit ([see below for a brief
+introduction](podio-introduction)). Hence, we will also be using some podio
+functionality to read files.
+
+For more technical information and pointers to how to read and understand the
+documentation see below.
+
+### Declaring a (generic) reader
+
+podio offers *generic readers* that will try to dynamically dispatch to the
+correct low level reader by checking the file contents to figure out which
+actual reader to instantiate. The available low level readers are
+- `podio::ROOTReader` (default) for reading ROOT files that are stored using
+  `TTree`s
+- `podio::RNTupleReader` for reading ROOT files that are stored using the new
+  RNTuple format
+- `podio::SIOReader` for reading SIO files written via podio
+
+```{note}
+The support for the RNTuple and SIO format needs to be configured for podio
+during its build. In Key4hep both are generally available
+```
+
+The following snippets show the necessary includes / imports and how to
+instantiate the generic reader.
+
+::::{tab-set}
+:::{tab-item} C++
+:sync: c++-examples
+
+```cpp
+#include <podio/Reader.h>      // makeReader
+#include <podio/ROOTReader.h>  // for ROOTReader (similar for the others)
+
+// The generic reader is constructed via makeReader and a (list of) filename(s)
+auto reader = podio::makeReader("<input-file-name>");
+
+// Low level readers are instantiated first and then call openFile(s)
+auto rootReader = podio::ROOTReader();
+rootReader.openFile("<input-file-name>"); // openFiles also exists!
+```
+
+Make sure to use `podio::podioIO` in your `target_link_libraries` if you build
+an executable via CMake.
+
+:::
+:::{tab-item} Python
+:sync: python-examples
+
+```python
+from podio.reading import get_reader  # for the generic reader
+from podio.root_io import Reader  # for TTree (i.e. ROOTReader)
+
+# The generic reader is obtained from get reader and a (list of) filename(s)
+reader = get_reader("<input-file-name>")
+
+# The low level Reader is explicitly instantiated with a (list of) filename(s)
+rootReader = Reader("<your-file-name>");
+```
+
+:::
+::::
+
+### Looping over events in a file
+
+Once you have a (generic) reader you can start looping over the events and
+obtaining collections. In the following we will be using MCParticles, but
+conceptual all EDM4hep types work the same.
+
+::::{tab-set}
+:::{tab-item} C++
+:sync: c++-examples
+
+```cpp
+#include <edm4hep/MCParticleCollection.h>
+
+#include <podio/Frame.h>
+
+// generic reader
+for (size_t i = 0; i < reader.getEvents(); ++i) {
+  auto event = reader.readEvent(i);
+  const auto& mcParticles = event.get<edm4hep::MCParticleCollection>("MCParticles");
+  // ...
+}
+
+// low level reader
+for (size_t i = 0; i < rootReader.getEntries(podio::Category::Event); ++i) {
+  auto event = podio::Frame(rootReader.readEntry(podio::Category::Event, i));
+  const auto& mcParticles = event.get<edm4hep::MCParticleCollection>("MCParticles");
+  // ...
+}
+```
+
+```{note}
+For the low level reader we have to explicitly create a `podio::Frame` and
+choose the *events* category, which is done automatically for us for the generic
+reader via `readEvent`. The generic reader can still read other categories via
+`readEntry`.
+```
+
+:::
+:::{tab-item} Python
+:sync: python-examples
+
+```python
+# generic reader
+for event in reader.get("events"):
+    mcParticles = event.get("MCParticles")
+    
+# low level reader
+for event in rootReader.get("events"):
+    mcParticles = event.get("MCParticles")
+```
+
+```{note}
+For python both are the exact same as `get_reader` simply returns an instance of
+one of the low level readers.
+```
+::: 
+::::
+
+
 ## Doxygen API documentation
 
 We start with having a look at the [EDM4hep doxygen API reference
@@ -115,6 +238,7 @@ namespace](https://edm4hep.web.cern.ch/namespaceedm4hep_1_1utils.html) (click on
 `Namespaces -> Namespace List`, then expand the `edm4hep` namespace and then
 click on `utils` to arrive at this link).
 
+(podio-introduction)=
 # podio - The technical infrastructure on which things run
 podio is an EDM toolkit that is used by and developed further in the Key4hep
 context. The main purpose is to have an efficiently implemented, thread safe EDM

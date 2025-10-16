@@ -42,19 +42,22 @@ software environment deployed via CVMFS (e.g. on *lxplus* or the *NAF*). It will
 also work if you have CVMFS installed locally and run a supported OS for
 Key4hep.
 
-- [ ] Container
-
-## Basic Gaudi introduction
-- [ ] TODO
-
 ## Setup
 
+You can follow this tutorial in two ways, either you use a CVMFS installation
+(available for Ubuntu24 and Alma9, e.g. via `lxplus` or the `NAF`) or you use a
+dedicated container image that we have created for this purpose.
+
 If you haven't done so already, source a Key4hep software environment via
+::::{tab-set}
+:::{tab-item} CVMFS installation
+:sync: cvmfs-setup
+
+Login into your favorite system (or use a local CVMFS installation) and source
+the following setup script.
 ```bash
 source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
 ```
-
-- [ ] TODO: Container setup
 
 For the remainder of the tutorial we will also assume that you are working
 within some tutorial directory. We will refer to this with the
@@ -67,6 +70,49 @@ cd tutorial_lcws
 export TUTORIAL_BASE_DIR=$(pwd)
 ```
 
+:::
+:::{tab-item} Container image (docker)
+:sync: container-setup-docker
+
+For the remainder of the tutorial we will also assume that you are working
+within some tutorial directory. We will refer to this with the
+`TUTORIAL_BASE_DIR` environment variable. Using the commands below this will all
+be done for you and launch the container appropriately.
+
+```bash
+# cd <path/where/you/have/some/space>
+mkdir tutorial_lcws
+docker run -it \
+    -v $(pwd)/tutorial_lcws:/resources/tutorial_lcws \
+    -e TUTORIAL_BASE_DIR=/resources/tutorial_lcws \
+    ghcr.io/key4hep/key4hep-sim-reco-ubuntu24:lcws-tutorial
+```
+
+This will immediately drop you into a Key4hep environment that is usable for
+this tutorial.
+:::
+
+:::{tab-item} Container image (apptainer)
+:sync: container-setup-apptainer
+
+For the remainder of the tutorial we will also assume that you are working
+within some tutorial directory. We will refer to this with the
+`TUTORIAL_BASE_DIR` environment variable. Using the commands below this will all
+be done for you and launch the container appropriately.
+
+```bash
+# cd <path/where/you/have/some/space>
+mkdir tutorial_lcws
+apptainer run \
+    -B $(pwd)/tutorial_lcws:/resources/tutorial_lcws \
+    --env TUTORIAL_BASE_DIR=/resources/tutorial_lcws \
+    docker://ghcr.io/key4hep/key4hep-sim-reco-ubuntu24:lcws-tutorial
+```
+
+:::
+::::
+
+
 For some of the steps it will be useful to have some input files with more
 statistics. Since running full simulation and reconstruction takes a
 considerable amount of time for these, we have prepared this files. We will
@@ -76,15 +122,15 @@ environment variable points to these input files
 
 ::::{tab-set}
 
-:::{tab-item} locally or non-lxplus
+:::{tab-item} Locally or not on lxplus
 :sync: non-lxplus
 
 If you are running on a workgroup server other than `lxplus` (e.g. on the NAF)
 or locally, e.g. using a container, you need to download some files first via
 
 ``` bash
-mkdir resources
-cd resources
+mkdir ${TUTORIAL_BASE_DIR}/resources
+cd ${TUTORIAL_BASE_DIR}/resources
 export RESOURCE_DIR=$(pwd)
 wget https://key4hep.web.cern.ch/tutorial/gen_tau_filtered/gen_tau_pi0_250-SetA_2f_leptonic_eL_pR.slcio
 wget https://key4hep.web.cern.ch/tutorial/gen_tau_filtered/gen_tau_pi0_250-SetA_2f_leptonic_eL_pR_REC_0.edm4hep.root
@@ -111,6 +157,7 @@ have to fetch the necessary configuration files by cloning
 for later; `ILDCONFIG_DIR`
 
 ```bash
+cd ${TUTORIAL_BASE_DIR}
 git clone --depth=1 https://github.com/iLCSoft/ILDConfig
 cd ILDConfig/StandardConfig/production
 export ILDCONFIG_DIR=$(pwd)
@@ -121,6 +168,7 @@ It is now possible to run the simulation using the input file that is available
 from the `RESOURCE_DIR` (see [above](#setup)).
 
 ``` bash
+cd $ILDCONFIG_DIR
 ddsim \
   --inputFiles ${RESOURCE_DIR}/gen_tau_pi0_250-SetA_2f_leptonic_eL_pR.slcio \
   --outputFile gen_tau_pi0_SIM.root \
@@ -184,6 +232,7 @@ Now that we have a basic understanding of the structure of the ILD
 reconstrucion, we can run it via
 
 ```bash
+cd $ILDCONFIG_DIR
 k4run ILDReconstruction.py \
   --inputFiles=gen_tau_pi0_SIM.root \
   --compactFile $k4geo_DIR/ILD/compact/ILD_l5_v02/ILD_l5_o1_v02.xml \

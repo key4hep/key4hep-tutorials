@@ -112,13 +112,14 @@ apptainer run \
 :::
 ::::
 
+### Input data
 
 For some of the steps it will be useful to have some input files with more
 statistics. Since running full simulation and reconstruction takes a
-considerable amount of time for these, we have prepared this files. We will
-describe the contents of these input files in more detail a bit furher below. To
-easily refer to these resources we will also assume that the `RESOURCE_DIR`
-environment variable points to these input files
+considerable amount of time for these, we have prepared these files in advance.
+We will describe the contents of these input files in more detail a bit furher
+below. To easily refer to these resources we will also assume that the
+`RESOURCE_DIR` environment variable points to these input files
 
 ::::{tab-set}
 
@@ -148,6 +149,20 @@ export RESOURCE_DIR=/eos/project/k/key4hep/www/key4hep/tutorial/gen_tau_filtered
 
 :::
 ::::
+
+The `gen_tau_pi0_250-SetA_2f_leptonic_eL_pR.slcio` file contains a skim of
+events from the `2f_leptonic` samples of the MC-2020 production, selecting only
+events with at least one hadronically decaying tau resulting in at least one
+neutral pion. Additionally, at least one of the photons from the pi0 decay has
+to have an energy of more than 10 GeV.
+
+The `gen_tau_pi0_250-SetA_2f_leptonic_eL_pR_REC_0.edm4hep.root` contains a few
+hundred events simulated and reconstructed via the ILD standard chain. It only
+contains a filtered down event content, which should allow you to test the
+algorithms you develop with a few hundred events to also give some more
+meaningful plots. More files similar to this are available by simply replacing
+the `0` with numbers up to `9`. However, for the purpose of this tutorial one
+file should suffice.
 
 ## Running standard ILD full simulation and reconstruction
 

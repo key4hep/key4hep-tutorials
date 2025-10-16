@@ -45,6 +45,7 @@ def main(args):
     pi0_mass_p4.Write()
     pi0_mass_prefit.Write()
     fit_delta_m.Write()
+    histfile.Close()
 
 
 if __name__ == "__main__":

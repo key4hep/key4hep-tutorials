@@ -548,16 +548,9 @@ int main() {
 ### The available low level readers
 
 - `ROOTReader` - The default reader for TTree based files
-- `ROOTLegacyReader` - The reader for an old podio format based on TTrees
 - `RNTupleReader` - A reader for RNTuple based files
 - `SIOReader` - The reader for reading files using the SIO backend
-- `SIOLegacyReader` - The reader for the SIO backend with an old podio format
 
-The `Legacy` readers are stated here mainly for completeness, in case you need
-to read a rather old file that still used the `EventStore` which has been
-removed from podio some time ago. See
-[here](#how-do-i-figure-out-if-a-file-is-legacy) for more information on how to
-figure out whether the file you are interested in is a legacy file or not.
 As podio is a rather low level tool, also the interface of these readers feel
 somewhat low level. This is mostly visible in the fact, that you have to provide
 a `category` (name) when getting the number of entries, or when reading the next
@@ -596,11 +589,10 @@ The equivalent python code looks like this
 from podio import root_io
 
 reader = root_io.Reader("some_file_containing_edm4hep_data.root")
-# if you want to read legacy files use root_io.LegacyReader
 
 for event in reader.get("events"):
-  mcParticles = event.get("MCParticles")
-  # do more stuff with this event
+    mcParticles = event.get("MCParticles")
+    # do more stuff with this event
 ```
 
 ## ROOT file layout of podio generated EDMs
@@ -613,21 +605,6 @@ ntuples.
 
 
 ![](images/edm4hep_browse_relations_1.png)
-
-### How do I figure out if a file is legacy?
-
-1. Use [`podio-dump`](#podio-dump) and it will tell you
-```console
-$podio-dump /home/workarea/data/rv02-02.sv02-02.mILD_l5_o1_v02.E250-SetA.I402003.Pe2e2h.eL.pR.n000.d_dstm_15089_0_edm4hep.root
-input file: /home/workarea/data/rv02-02.sv02-02.mILD_l5_o1_v02.E250-SetA.I402003.Pe2e2h.eL.pR.n000.d_dstm_15089_0_edm4hep.root
-
-Frame categories in this file (this is a legacy file!):
-[...]
-```
-
-2. Peek inside the root file and look at the contents
-
-![]()<img src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/initial_browser_edm4hep.png" width="200"> ![]()<img src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/initial_browser_legacy_edm4hep.png" width="200">
 
 
 ## `podio-dump`

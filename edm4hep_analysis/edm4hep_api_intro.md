@@ -176,18 +176,19 @@ what this actually means are not very important, the main point **is that you
 can treat all objects as values and you don't have to worry about inefficient
 copies or managing resources:**
 
+
 ```cpp
 auto recos = edm4hep::ReconstructedParticleCollection();
 
 // ... fill, e.g. via
 auto p = recos.create();
 // or via
-auto p2 = edm4hep::ReconstructedParticle();
+auto p2 = edm4hep::MutableReconstructedParticle();
 recos.push_back(p2); 
 
 // Loop over a collection
 for (auto reco : recos) {
-  auto vtx = reco.getStartVertex();
+  auto vtx = reco.getDecayVertex();
   // do something with the vertex
   
   // loop over related tracks
@@ -205,17 +206,17 @@ recos = edm4hep.ReconstructedParticleCollection()
 # ... fill, e.g. via
 p = recos.create()
 # or via
-p2 = edm4hep.ReconstructedParticle()
+p2 = edm4hep.MutableReconstructedParticle()
 recos.push_back(p2)
 
 # Loop over a collection
 for reco in recos:
-  vtx = reco.getStartVertex()
-  # do something with the vertex
+    vtx = reco.getDecayVertex()
+    # do something with the vertex
   
-  # loop over related tracks
-  for track in reco.getTracks():
-    # do something with the tracks
+    # loop over related tracks
+    for track in reco.getTracks():
+        # do something with the tracks
 ```
 
 The python interface is functionally equivalent to the one c++ interface, since

@@ -1528,12 +1528,74 @@ fitter.addConstraint(mc);
 
 ### Pi0 / GammaGamma analysis
 
-- [ ] TODO: Overhaul EDM4hep introduction and point to there from here
-- [ ] Mention that we have solutions available in .analysis
+In the `analysis` folder we have prepared some skeleton scripts (in various
+different flavours) to make some quick plots from the output files we have just
+created. They contain a minor task of adding an additional histogram, but are
+runnable without any modifications and will give you a plot to look at. Again
+you can find complete solutions in the `.solution/analysis` folder.
 
-- Make people aware of potential lifetime issues in python. See
-  https://github.com/AIDASoft/podio/issues/642
-- Will probably find bug in original implementation related to minimal pT cut
+For running any of them choose your favorite version and go with that.
+
+::::{tab-set}
+:::{tab-item} C++ interface
+
+In this case you have to build the executable first. We have added a minimal
+`CMakeLists.txt` file for that. (This is generic enough to also serve as a
+simple copy-paste template for your work)
+
+``` bash
+cmake -B analysis/build -S analysis
+cmake --build analysis/build
+```
+
+Whenever you change `analysis/make_pi0_hists.cpp` rerun `cmake --build
+analysis/build`.
+
+To run the program do
+
+``` bash
+./analysis/build/make_pi0_hists pi0_candidates.root
+```
+
+(assuming you haven't changed the output filename in
+`runGammaGammaCandidateFinder.py`).
+
+:::
+:::{tab-item} C++ interface (ROOT macro)
+
+``` bash
+root -l -q analysis/make_pi0_hists.C
+```
+
+```{note} 
+You might need to change the filename that is passed to `podio::makeReader` if
+you have changed it in the exercise before.
+```
+
+:::
+:::{tab-item} Python interface
+
+``` bash
+python3 analysis/make_pi0_hits.py pi0_candidates.root
+```
+
+(assuming you haven't changed the output filename in
+`runGammaGammaCandidateFinder.py`).
+
+:::
+::::
+
+All of these options produce an output root file with histograms stored in them.
+We also provide a helper script to save them as `pdf`s:
+
+```bash
+python analysis/make_plots.py <output-file-from-above>
+```
+
+
+The `.solution/analysis` folder also contains an example of how to use `uproot`
+to read EDM4hep files.
+
 
 ### Replace wrapped processor with new algorithms
 

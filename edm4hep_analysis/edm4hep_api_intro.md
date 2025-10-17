@@ -300,7 +300,9 @@ what this actually means are not very important, the main point **is that you
 can treat all objects as values and you don't have to worry about inefficient
 copies or managing resources:**
 
-
+::::{tab-set}
+:::{tab-item} C++
+:sync: c++-examples
 ```cpp
 auto recos = edm4hep::ReconstructedParticleCollection();
 
@@ -322,7 +324,9 @@ for (auto reco : recos) {
 }
 ```
 
-This looks very similar to the equivalent python code (if you squint a bit, and ignore the `auto`s, `;` and `{}` ;) )
+:::
+:::{tab-item} Python
+:sync: python-examples
 
 ```python
 recos = edm4hep.ReconstructedParticleCollection()
@@ -342,6 +346,8 @@ for reco in recos:
     for track in reco.getTracks():
         # do something with the tracks
 ```
+:::
+::::
 
 The python interface is functionally equivalent to the one c++ interface, since
 that is implemented via PyROOT. There are some additions that make the python
@@ -482,15 +488,20 @@ podio](https://github.com/AIDASoft/podio/blob/master/doc/frame.md).
 Assuming that `event` is a `podio::Frame` in the following code examples,
 getting a collection can be done via (c++)
 
+::::{tab-set}
+:::{tab-item} C++
+:sync: c++-examples
 ```cpp 
 auto& mcParticles = event.get<edm4hep::MCParticleCollection>("MCParticles"); 
 ```
-
-or (python)
-
+:::
+:::{tab-item} Python
+:sync: python-examples
 ```python 
 mcParticles = event.get("MCParticles")
 ```
+:::
+::::
 
 This retrieves the collection that is stored under the name `MCParticles` with
 type `edm4hep::MCParticleCollection`. If no such collection exists, it will
@@ -561,6 +572,10 @@ in podio do not return a `podio::Frame` directly, rather they just return some
 *frame data* from which a `podio::Frame` can be constructed. Putting all of
 these things together, a simple event loop looks like this in c++:
 
+::::{tab-set}
+:::{tab-item} C++
+:sync: c++-examples
+
 ```cpp
 #include "podio/ROOTReader.h"
 #include "podio/Frame.h"
@@ -583,7 +598,9 @@ int main() {
 }
 ```
 
-The equivalent python code looks like this
+:::
+:::{tab-item} Python
+:sync: python-examples
 
 ```python
 from podio import root_io
@@ -594,6 +611,8 @@ for event in reader.get("events"):
     mcParticles = event.get("MCParticles")
     # do more stuff with this event
 ```
+:::
+::::
 
 ## ROOT file layout of podio generated EDMs
 podio generated EDMs, i.e. also EDM4hep, use ROOT as their default I/O backend.

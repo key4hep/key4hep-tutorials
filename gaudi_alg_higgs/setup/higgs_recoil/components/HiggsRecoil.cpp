@@ -30,17 +30,6 @@
 
 #include <string>
 
-// histogram compatibility when older version of Gaudi is used
-#include "GAUDI_VERSION.h"
-#if GAUDI_MAJOR_VERSION < 39
-namespace Gaudi::Accumulators {
-  template <unsigned int ND, atomicity Atomicity = atomicity::full, typename Arithmetic = double>
-  using StaticHistogram =
-      Gaudi::Accumulators::HistogramingCounterBase<ND, Atomicity, Arithmetic, naming::histogramString,
-                                                   HistogramingAccumulator>;
-}
-#endif
-
 struct HiggsRecoil final
   : k4FWCore::MultiTransformer<std::tuple<edm4hep::ReconstructedParticleCollection,
                                                    edm4hep::ReconstructedParticleCollection>

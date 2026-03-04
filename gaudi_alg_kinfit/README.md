@@ -1263,6 +1263,26 @@ PhotonFilter        DEBUG data dependencies:
 
 :::::
 
+:::::{dropdown} My algorithm is configured correctly but still not run
+
+In case you have [correctly configured your algorithm](algorithm-in-top-alg) 
+but it looks like the `operator()` is never entered you most likely have to 
+adapt your *event selection* in the `ApplicationMgr`.
+
+```python
+ApplicationMgr(
+    EvtSel="NONE",
+    # other arguments
+)
+```
+
+::::{note}
+It is important to use `NONE` in all-caps here as otherwise no algorithm will run
+during the event loop.
+::::
+
+:::::
+
 :::{dropdown} My collection is not stored in the output file
 
 After you have ensured that [you do not drop all

@@ -26,6 +26,11 @@ subfolder in this repository.
   Contains a small exercise that makes you use the basic components from podio
   and EDM4hep for writing small plotting scripts
 
+- [`generate_gaudi_functionals`](https://github.com/key4hep/key4hep-tutorials/blob/main/generate_gaudi_functionals/README.md) -
+  Uses the `generateFunctional` helper from k4FWCore to generate framework-correct C++
+  scaffolding for Gaudi Functional algorithms (consumers, producers, transformers and
+  filters) from a short collection specification.
+
 ## The instructions look a bit weird
 The instructions are in markdown (`md`) format, but they might contain `sphinx`
 specific tags since some of them are also included in the [key4hep

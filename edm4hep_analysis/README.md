@@ -27,7 +27,7 @@ cd edm4hep_plotting_tutorial
 
 In order to have at least some statistics for plots we have prepared a few input
 files for this exercise. You can find them at
-`/eos/project/k/key4hep/www/key4hep/tutorial/zh_mumu_filtered/`.[^1]
+`/eos/project/k/key4hep/www/key4hep/tutorial/zh_mumu_ild_dst/`.[^1]
 
 [^1]:These are output files produced by the [*Gaudi algorithm
 tutorial*](https://github.com/key4hep/key4hep-tutorials/blob/main/gaudi_alg_higgs/README.md).
@@ -37,9 +37,9 @@ you can also download these files via (each file contains roughly 9k events
 and has around 50MB)
 
 ``` bash
-wget https://key4hep.web.cern.ch/key4hep/tutorial/zh_mumu_filtered/higgs_recoil_from_gaudi_0.edm4hep.root
-wget https://key4hep.web.cern.ch/key4hep/tutorial/zh_mumu_filtered/higgs_recoil_from_gaudi_1.edm4hep.root
-wget https://key4hep.web.cern.ch/key4hep/tutorial/zh_mumu_filtered/higgs_recoil_from_gaudi_2.edm4hep.root
+wget https://key4hep.web.cern.ch/key4hep/tutorial/zh_mumu_ild_dst/rv02-02.sv02-02.mILD_l5_o1_v02.E250-SetA.I402004.Pe2e2h.eR.pL.n000.d_dstm_15090_0.edm4hep.root
+wget https://key4hep.web.cern.ch/key4hep/tutorial/zh_mumu_ild_dst/rv02-02.sv02-02.mILD_l5_o1_v02.E250-SetA.I402004.Pe2e2h.eR.pL.n000.d_dstm_15090_1.edm4hep.root
+wget https://key4hep.web.cern.ch/key4hep/tutorial/zh_mumu_ild_dst/rv02-02.sv02-02.mILD_l5_o1_v02.E250-SetA.I402004.Pe2e2h.eR.pL.n000.d_dstm_15090_2.edm4hep.root
 ```
 
 ## Exercise
